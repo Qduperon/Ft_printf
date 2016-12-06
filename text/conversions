@@ -1,0 +1,33 @@
+s : Print a string.
+	Characters from the array are written up to (but not including) a terminating null byte ('\0');
+	if a precision is specified, no more than the number specified are written.
+	If a precision is given, no null byte need be present;
+	if the precision is not specified, or > than the size of the array, the array must contain a terminating null byte.
+	
+S : same as ls (a pointer to wchar_t argument)
+
+p : void pointer -> hexadecimal
+
+d : Print an integer as a signed decimal number.
+
+D : same as ld
+
+i : integer (same as d)
+
+o : unsigned octal
+
+O : same as lo
+
+u : Print an unsigned integer.
+
+U : same as lu ()
+
+x : The letters abcdef are used for x conversions
+
+X : The letters ABCDEF are used for X conversions.
+
+c : Print a single character.
+
+C : same as lc (a wint_t argument)
+
+D, O, U are all length modifiers;
