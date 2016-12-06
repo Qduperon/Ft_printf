@@ -1,0 +1,7 @@
+le caractère % peut être éventuellement suivi par un ou plusieurs attributs suivants :
+
+# : indique que la valeur doit être convertie en une autre forme. Pour la conversion o le premier caractère de la chaîne de sortie vaudra zéro (en ajoutant un préfixe 0 si ce n'est pas déjà un zéro). 
+Pour les conversions x et X une valeur non nulle reçoit le préfixe « 0x » (ou « 0X » pour l'indicateur X). Pour les conversions a, A, e, E, f, F, g, et G le résultat contiendra toujours un point décimal même si aucun chiffre ne le suit (normalement, un point décimal n'est présent avec ces conversions que si des décimales le suivent). 
+Pour les conversions g et G les zéros en tête ne sont pas éliminés, contrairement au comportement habituel. Pour les autres conversions, cet attribut n'a pas d'effet.
+
+
