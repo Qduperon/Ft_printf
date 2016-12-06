@@ -58,3 +58,5 @@ C : same as lc (a wint_t argument
 	initial state, and the resulting multibyte string is written.
 
 D, O, U are all length modifiers; l makes things as long /or wide characters
+
+%% : imprime juste un '%'
