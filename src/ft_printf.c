@@ -1,38 +1,38 @@
 #include "../includes/ft_printf.h"
 
-char	*ft_parse(char *next_conv)
+int		arg_parse (va_list *args, const char **format)
+
+int		ft_parse(const char *format, va_lst *args)
 {
 	int i;
+	int len;
 
-	i = 1;
-	if (next_conv[1] == '%')
+	i = 0;
+	len = 0;
+	while (*format)
 	{
-		//ft_putchar('%');
-		return (next_conv + i);
-	}
-	while (next_conv[i] && (ft_digit(next_conv[i]) == 1))
-	{
-		if (next_conv[1] == )
+		if (*format == '%')
+			len += arg_parse(args, &format);
+		else if (*format != '\0')
+		{
+			ft_putchar(*format);
+			format++;
+			len++;
+		}
 	}
 }
 
 int		ft_printf(const char *format, ...)
 {
 	va_list		lst;
-	char		*nxt_conv;
+	int			len;
 
-	va_start(lst, format);
-	nxt_conv = ft_strchr(lst, '%');
-	if (*format == '\0')
-		return (0);
-	if (!nxt_conv)
+	len = 0;
+	if (format)
 	{
-		ft_putstr(format);
-		return (ft_strlen(format));
+		va_start(args, format);
+		len = (ft_parse(format, &args));
+		va_end(args);
 	}
-	while (nxt_conv)
-	{
-		if (!(next_conv = ft_parse(next_conv))
-			return (-1); //idk what its supposed to send
-	}
+	return (len);
 }
