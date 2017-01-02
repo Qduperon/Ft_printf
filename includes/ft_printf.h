@@ -14,10 +14,22 @@
 # define FT_PRINTF_H
 
 # define CONVERSION sSpdDioOuUxXcC
-# define FLAGS #0-+hljz
+# define FLAGS #0-+
+# define LENGTHMOD hljz
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+
+typedef struct		s_form
+{
+	char			conversion;
+	char			mzflag;
+	char			spflag;
+	char			pflag;
+	char			*length_mod;
+	int				precision;
+	int				padding;
+}					t_form;
 
 #endif
