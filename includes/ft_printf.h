@@ -6,7 +6,7 @@
 /*   By: qduperon <qduperon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 11:26:14 by qduperon          #+#    #+#             */
-/*   Updated: 2016/12/18 18:22:22 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/06 17:24:48 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,30 @@
 # define FT_PRINTF_H
 
 # define CONVERSION sSpdDioOuUxXcC
-# define FLAGS #0-+
-# define LENGTH_MOD hljz
-
+# include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 
 typedef struct		s_form
 {
-	char			conversion_spec;
-	char			flag;
-	char			sign;
-	char			*length_modif;
-	int				min_len;
+	char			conversion;
+	char			mzflag;
+	char			spflag;
+	char			pflag;
+	char			*length_mod;
 	int				precision;
 	int				padding;
 }					t_form;
+
+int		ft_printf(const char *format, ...);
+int		ft_parse(const char *format, va_list *args);
+int		arg_parse (va_list *args, char *format, int *i);
+t_form	*struct_init(void);
+void	ft_length_mod(t_form *form_struct, char *frmt, int *i);
+void	ft_prec_pad(t_form *form_struct, char *format, int *i);
+void	ft_flags(t_form *form_struct, char *format, int *i);
+int		isflag(char c);
+int		islmodifier(char *c);
 
 #endif
