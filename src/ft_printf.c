@@ -1,6 +1,9 @@
 #include "../includes/ft_printf.h"
 
 int		arg_parse (va_list *args, const char **format)
+{
+
+}
 
 int		ft_parse(const char *format, va_lst *args)
 {
