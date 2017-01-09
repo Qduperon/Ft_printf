@@ -68,4 +68,11 @@ void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
 	printf("length mod: %s\n", form_struct->length_mod);
 }
 
-// void 	ft_conversion(t_form *form_struct, char *frmt, )
+int 	ft_conversion(t_form *form_struct, char *frmt, char c)
+{
+	int		len;
+
+	len = 0;
+	
+	return (len);
+}
