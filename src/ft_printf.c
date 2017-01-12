@@ -29,7 +29,7 @@ int		arg_parse (va_list *args, char *format, int *i, char *final)
 		ft_flags(form_struct, format, i);
 		ft_prec_pad(form_struct, format, i);
 		ft_length_mod(form_struct, format, i);
-		if ((len = ft_conversion(form_struct, args, &format[*i], final)) != 0)
+		if ((len = ft_conversion(form_struct, args, &format[*i], &final)) != 0)
 		{
 			(*i)++;
 			break ;
