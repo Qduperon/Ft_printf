@@ -68,7 +68,7 @@ void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
 	printf("length mod: %s\n", form_struct->length_mod);
 }
 
-int 	ft_conversion(t_form *form_struct, va_list args, char *c)
+int 	ft_conversion(t_form *form_struct, va_list args, char *c, char *final)
 {
 	int		i;
 	int		(*convert[5])(va_list, t_form);
@@ -84,9 +84,15 @@ int 	ft_conversion(t_form *form_struct, va_list args, char *c)
 	while (CONVERSION[i++])
 	{
 		if (CONVERSION[i] == c[0] && (i >= 6))
-			return (ft_convertint(va_arg(args, long long), form_struct, c[0]));
+		{
+			form_struct->conversion = c[0];
+			return (ft_convertint(va_arg(args, long long), form_struct));
+		}
 		else if (CONVERSION[i] == c[0])
+		{
+			form_struct->conversion = c[0];
 			return (convert[i])(args, form_struct);
+		}
 	}
 	return (0);
 }

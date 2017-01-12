@@ -16,7 +16,7 @@ t_form	*struct_init(void)
 	return (form_struct);
 }
 
-int		arg_parse (va_list *args, char *format, int *i)
+int		arg_parse (va_list *args, char *format, int *i, char *final)
 {
 	int		len;
 	t_form	*form_struct;
@@ -29,7 +29,7 @@ int		arg_parse (va_list *args, char *format, int *i)
 		ft_flags(form_struct, format, i);
 		ft_prec_pad(form_struct, format, i);
 		ft_length_mod(form_struct, format, i);
-		if ((len = ft_conversion(form_struct, args, &format[*i])) != 0)
+		if ((len = ft_conversion(form_struct, args, &format[*i], final)) != 0)
 		{
 			(*i)++;
 			break ;
@@ -44,14 +44,17 @@ int		ft_parse(const char *format, va_list *args)
 	int		i;
 	int		len;
 	char	*str;
+	char	*final;
 
 	i = 0;
 	len = 0;
 	str = (char *)format;
+	if (!(final = malloc(sizeof(char *) + 1)))
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '%')
-			len += arg_parse(args, str, &i);
+			len += arg_parse(args, str, &i, final);
 		else if (str[i] != '\0')
 		{
 			ft_putchar(str[i]);
@@ -59,6 +62,7 @@ int		ft_parse(const char *format, va_list *args)
 			len++;
 		}
 	}
+	ft_putstr(final);
 	return (len);
 }
 

@@ -7,7 +7,7 @@ int		ft_s(va_list args, t_form *form_struct)
 
 	i = 0;
 	str = va_arg(args, wchar_t *);
-
+	
 }
 
 int		ft_S(va_list args, t_form form_struct)
