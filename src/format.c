@@ -68,31 +68,29 @@ void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
 	printf("length mod: %s\n", form_struct->length_mod);
 }
 
-int 	ft_conversion(t_form *form_struct, va_list args, char *c, char **final)
+int 	ft_conversion(t_form *form_struct, va_list args, char *c, int i)
 {
-	int		i;
 	int		(*convert[5])(va_list, t_form, char **);
 
-	i = 0;
 	convert[0] = &ft_s;
 	convert[1] = &ft_S;
 	convert[2] = &ft_p;
 	convert[4] = &ft_c;
 	convert[5] = &ft_C;
-	if (c[0] == '%')
-		(return (writeperct(c, final)));
 	while (CONVERSION[i++])
 	{
 		if (CONVERSION[i] == c[0] && (i >= 6))
 		{
 			form_struct->conversion = c[0];
-			return (ft_convertint(va_arg(args, long long), form_struct, final));
+			return (ft_convertint(va_arg(args, long long), form_struct));
 		}
 		else if (CONVERSION[i] == c[0])
 		{
 			form_struct->conversion = c[0];
-			return (convert[i])(args, form_struct, final);
+			return (convert[i])(args, form_struct);
 		}
 	}
+	if (c[0] == '%' || ft_isprint(c[0]))
+		(return (writeperct(c)));
 	return (0);
 }
