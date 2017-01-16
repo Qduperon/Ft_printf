@@ -2,13 +2,10 @@
 
 int		ft_convertint(long long nb, t_form *form_struct, char c)
 {
-	if (form_struct->length_mod != NULL)
-	{
-		
-	}
+	return (0);
 }
 
 int		writeperct(char *c)
 {
-
+	return (0);
 }

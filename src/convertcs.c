@@ -14,26 +14,27 @@ char	*ft_strprecision(char *str, t_form *form_struct)
 			return (NULL);
 		while (space-- > 0)
 			tmp[i++] = ' ';
-		tmp = ft_strncpy(&tmp[i], src, form_struct->precision);
+		tmp = ft_strncpy(&tmp[i], str, form_struct->precision);
 		return (tmp);
 	}
 	else
-		return (ft_strndup(str, form_struct->padding));
+		return (ft_strndup(str, form_struct->precision));
 }
 
 char	*ft_strpadding(char *str, t_form *form_struct)
 {
 	int		i;
 	int		space;
+	char	*tmp;
 
 	i = 0;
 	space = form_struct->padding - (int) ft_strlen(str);
-	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding + 1))))
+	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 		return (NULL);
 	while (space-- > 0)
 		tmp[i++] = ' ';
 	ft_strcpy(&tmp[i], str);
-	return (tmp));
+	return (tmp);
 }
 
 int		ft_s(va_list args, t_form *form_struct)
@@ -43,7 +44,7 @@ int		ft_s(va_list args, t_form *form_struct)
 	int		len;
 
 	if (ft_strcmp(form_struct->length_mod, "l") == 0)
-		return (ft_S(args, form_struct, final));
+		return (ft_S(args, form_struct));
 	if (!(str = va_arg(args, char *)))
 		tmp = "(null)"; //check if this works
 	else
@@ -58,21 +59,21 @@ int		ft_s(va_list args, t_form *form_struct)
 	return (len);
 }
 
-int		ft_c(va_list args, t_form form_struct)
+int		ft_c(va_list args, t_form *form_struct)
 {
 	int		i;
-	char	*tmp
+	char	*tmp;
 	char	str;
 
 	i = 1;
 	if (ft_strcmp(form_struct->length_mod, "l") == 0)
-		return (ft_C(args, form_struct);
-	str = (char) va_arg(args, unsigned char);
+		return (ft_C(args, form_struct));
+	str = (char) va_arg(args, wchar_t);
 	if (form_struct->padding > 1)
 	{
-		if (form_struct->precision != NULL)
+		if (form_struct->precision != 0)
 			form_struct->precision = 0;
-		tmp = (ft_strpadding(&str, form_struct)) //check if gives two chars instead of one
+		tmp = (ft_strpadding(&str, form_struct)); //check if gives two chars instead of one
 		ft_putstr(tmp);
 		i = ft_strlen(tmp);
 		free(tmp);

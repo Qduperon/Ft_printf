@@ -6,7 +6,7 @@
 /*   By: qduperon <qduperon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 11:26:14 by qduperon          #+#    #+#             */
-/*   Updated: 2017/01/10 17:20:26 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/16 20:54:48 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,14 @@ void	ft_prec_pad(t_form *form_struct, char *format, int *i);
 void	ft_flags(t_form *form_struct, char *format, int *i);
 int		isflag(char c);
 int		islmodifier(char *c);
+char	*ft_strpadding(char *str, t_form *form_struct);
+int		ft_S(va_list args, t_form *form_struct);
+int		ft_s(va_list args, t_form *form_struct);
+int		ft_C(va_list args, t_form *form_struct);
+int		ft_c(va_list args, t_form *form_struct);
+int		ft_p(va_list args, t_form *form_struct);
+int		ft_convertint(long long nb, t_form *form_struct, char c);
+int		writeperct(char *c);
+int 	ft_conversion(t_form *form_struct, va_list *args, char *c, int i);
 
 #endif

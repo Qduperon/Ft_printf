@@ -16,7 +16,7 @@ t_form	*struct_init(void)
 	return (form_struct);
 }
 
-int		arg_parse (va_list *args, char *format, int *i, char *final)
+int		arg_parse (va_list *args, char *format, int *i)
 {
 	int		len;
 	t_form	*form_struct;
