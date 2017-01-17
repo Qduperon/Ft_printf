@@ -2,6 +2,7 @@
 
 int		ft_convertint(long long nb, t_form *form_struct, char c)
 {
+
 	return (0);
 }
 

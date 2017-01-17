@@ -3,74 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qduperon <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/11/27 11:29:17 by qduperon          #+#    #+#              #
-#    Updated: 2016/10/04 15:50:31 by qduperon         ###   ########.fr        #
+#    Created: 2016/11/04 14:17:48 by spalmaro          #+#    #+#              #
+#    Updated: 2016/11/05 16:41:33 by spalmaro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#===========================================================#
-#	   			    //   LIBRARY   \\                       #
-#===========================================================#
-
 NAME = libft.a
 
-#===========================================================#
-#                    //   VARIABLE  \\                      #
-#===========================================================#
+C_FILES = $(shell find . -type f -print | grep "\.c")
 
-H_DIR = includes
-C_DIR = srcs
-O_DIR = objects
+OBJ_NAME = $(C_FILES:.c=.o)
 
-LINKS = -I$(H_DIR)
+HEADER_FLAG = -I libft.h
 
-C_FILES = $(shell find $(C_DIR) -type f -print | grep "\.c")
-C_DIRS = $(shell find $(C_DIR) -type d -print)
+CC = gcc
 
-O_DIRS = $(C_DIRS:$(C_DIR)/%=$(O_DIR)/%)
-O_FILES = $(C_FILES:$(C_DIR)/%.c=$(O_DIR)/%.o)
+CFLAGS = -Wall -Wextra -Werror
 
-#============================================================#
-#                      //  FLAGS  \\                         #
-#============================================================#
-
-FLAGS = -Werror -Wextra -Wall
-
-#============================================================#
-#                   //  COMPILATION  \\                      #
-#============================================================#
+.PHONY : all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(O_FILES)
-	@ar rcs $@ $^ && printf "\033[0;32m" || printf "\033[031m"
-	@printf "%-34s \033[1;30m<<--\033[0;0m\n" "$@"
-
-$(O_DIR)/%.o: $(C_DIR)/%.c
-	@mkdir -p $(O_DIRS) $(O_DIR)
-	@gcc $(FLAGS) $(LINKS) -o $@ -c $< \
-		&& printf "\033[0;0m%-34s\033[1;30m -->>\t\033[0;32m$@\033[0;0m\n" "$<"
-
-#============================================================#
-#                     //  DELETING  \\                       #
-#============================================================#
+$(NAME):
+	$(CC) -c $(CFLAGS) $(C_FILES) $(HEADER_FLAG)
+	ar rc $(NAME) $(OBJ_NAME)
+	ranlib $(NAME)
 
 clean:
-	@echo "\033[35mDeleting Objects...\033[00m"
-	rm -rf objects/list objects/utility objects/print objects/string objects/memory objects/test $(O_DIR)
-	@echo "\033[31mDone\033[00m"
+	rm -fv $(OBJ_NAME)
 
 fclean: clean
-	@echo "\033[35mDeleting Library...\033[00m"
-	rm -f $(NAME)
-	@echo "\033[31mDone\033[00m"
-
-#============================================================#
-#	     			   //  RETRY  \\                         #
-#============================================================#
+	rm -fv $(NAME)
 
 re: fclean all
-
-.PHONY : all clean fclean re

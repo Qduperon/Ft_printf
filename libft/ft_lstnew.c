@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 16:34:46 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:03:53 by spalmaro         ###   ########.fr       */
+/*   Created: 2016/11/03 19:17:23 by spalmaro          #+#    #+#             */
+/*   Updated: 2016/11/05 16:24:52 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	size_t	i;
-	char	*dest;
+	t_list	*list;
+	void	*cpy;
 
-	i = 0;
-	if (n >= ft_strlen(s1))
-		return (ft_strdup(s1));
-	if (!(dest = (char *)malloc(sizeof(char) * (n + 1))))
+	cpy = ft_memalloc(content_size);
+	if (!(cpy))
 		return (NULL);
-	while (s1[i] && i < n)
+	if (!content)
 	{
-		dest[i] = s1[i];
-		i++;
+		cpy = NULL;
+		content_size = 0;
 	}
-	dest[i] = '\0';
-	return (dest);
+	else
+		cpy = ft_memcpy(cpy, content, content_size);
+	if (!(list = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	list->content = cpy;
+	list->content_size = content_size;
+	list->next = NULL;
+	return (list);
 }

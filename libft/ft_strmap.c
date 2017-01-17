@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 16:34:46 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:03:53 by spalmaro         ###   ########.fr       */
+/*   Created: 2016/11/03 18:08:30 by spalmaro          #+#    #+#             */
+/*   Updated: 2016/11/07 18:24:17 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	size_t	i;
-	char	*dest;
+	int		i;
+	char	*new;
 
 	i = 0;
-	if (n >= ft_strlen(s1))
-		return (ft_strdup(s1));
-	if (!(dest = (char *)malloc(sizeof(char) * (n + 1))))
+	new = NULL;
+	if (!s || !f)
 		return (NULL);
-	while (s1[i] && i < n)
+	if (!(new = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))))
+		return (NULL);
+	while (s[i])
 	{
-		dest[i] = s1[i];
+		new[i] = (*f)(s[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	new[i] = '\0';
+	return (new);
 }

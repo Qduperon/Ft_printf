@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_base_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 16:34:46 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:03:53 by spalmaro         ###   ########.fr       */
+/*   Created: 2016/11/07 17:47:52 by spalmaro          #+#    #+#             */
+/*   Updated: 2017/01/16 17:07:11 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+int		ft_base_size(int nbr, int base)
 {
-	size_t	i;
-	char	*dest;
+	int len;
+	int sign;
 
-	i = 0;
-	if (n >= ft_strlen(s1))
-		return (ft_strdup(s1));
-	if (!(dest = (char *)malloc(sizeof(char) * (n + 1))))
-		return (NULL);
-	while (s1[i] && i < n)
+	sign = 0;
+	len = 1;
+	if (nbr < 0)
 	{
-		dest[i] = s1[i];
-		i++;
+		nbr = nbr * -1;
+		if (base == 10)
+			sign = 1;
 	}
-	dest[i] = '\0';
-	return (dest);
+	while (nbr >= base)
+	{
+		len++;
+		nbr = nbr / base;
+	}
+	return (len + sign);
 }

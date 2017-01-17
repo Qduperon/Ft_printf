@@ -12,15 +12,19 @@ int		ft_S(va_list args, t_form *form_struct)
 
 int		ft_p(va_list args, t_form *form_struct)
 {
-	int			i;
+	unsigned long	i;
+	int				len;
 	// char		*tmp;
-	char		*str;
+	char			*str;
 
-	i = (int) va_arg(args, void *);
-	str = ft_strjoin("0x", ft_itoa_base(i, 16));
+	i = (unsigned long) va_arg(args, void *);
+	len = 0;
+	str = ft_strjoin("0x", ft_lltoa_base(i, 16));
 	if (form_struct->padding > ft_strlen(str))
 		str = ft_strpadding(str, form_struct);
-	return(ft_strlen(str));
+	ft_putstr(str);
+	len = ft_strlen(str);
+	return(len);
 }
 
 int		ft_C(va_list args, t_form *form_struct)

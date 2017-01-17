@@ -73,24 +73,19 @@ int 	ft_conversion(t_form *form_struct, va_list *args, char *c, int i)
 	int		(*convert[5])(va_list, t_form*);
 	char	*conversion;
 
+	conversion = "sSpcCdDioOuUxX";
 	convert[0] = &ft_s;
 	convert[1] = &ft_S;
 	convert[2] = &ft_p;
 	convert[3] = &ft_c;
 	convert[4] = &ft_C;
-	conversion = "sSpcCdDioOuUxX";
-	while (conversion[i++])
+	while (conversion[i])
 	{
-		if (conversion[i] == c[0] && (i >= 6))
-		{
-			form_struct->conversion = c[0];
+		if (conversion[i] == c[0] && (i >= 5))
 			return (ft_convertint(va_arg(*args, long long), form_struct, c[0]));
-		}
 		else if (conversion[i] == c[0])
-		{
-			form_struct->conversion = c[0];
 			return (convert[i])(*args, form_struct);
-		}
+		i++;
 	}
 	if (c[0] == '%' || ft_isprint(c[0]))
 		return (writeperct(c));

@@ -6,7 +6,6 @@ t_form	*struct_init(void)
 
 	if (!(form_struct = malloc(sizeof(t_form))))
 		return (NULL);
-	form_struct->conversion = '\0';
 	form_struct->mzflag = '\0';
 	form_struct->spflag = '\0';
 	form_struct->pflag = '\0';

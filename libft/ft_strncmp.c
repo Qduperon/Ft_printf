@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 16:34:46 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:03:53 by spalmaro         ###   ########.fr       */
+/*   Created: 2016/11/03 16:35:03 by spalmaro          #+#    #+#             */
+/*   Updated: 2016/11/05 16:58:05 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
-	char	*dest;
+	size_t			i;
 
 	i = 0;
-	if (n >= ft_strlen(s1))
-		return (ft_strdup(s1));
-	if (!(dest = (char *)malloc(sizeof(char) * (n + 1))))
-		return (NULL);
-	while (s1[i] && i < n)
+	if (s1 || s2 || n)
 	{
-		dest[i] = s1[i];
-		i++;
+		while (i < n)
+		{
+			if (s1[i] != s2[i])
+				return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+			else if (!s1[i] || !s2[i])
+				return (0);
+			i++;
+		}
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (0);
 }

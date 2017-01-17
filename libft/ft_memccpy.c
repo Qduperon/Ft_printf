@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/03 16:34:46 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:03:53 by spalmaro         ###   ########.fr       */
+/*   Created: 2016/11/03 16:34:34 by spalmaro          #+#    #+#             */
+/*   Updated: 2016/11/05 16:27:49 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t	i;
-	char	*dest;
+	unsigned char	*sc;
+	unsigned char	*dt;
 
-	i = 0;
-	if (n >= ft_strlen(s1))
-		return (ft_strdup(s1));
-	if (!(dest = (char *)malloc(sizeof(char) * (n + 1))))
-		return (NULL);
-	while (s1[i] && i < n)
+	sc = (unsigned char *)src;
+	dt = (unsigned char *)dst;
+	while (n > 0)
 	{
-		dest[i] = s1[i];
-		i++;
+		if (*sc == (unsigned char)c)
+		{
+			*dt++ = *sc;
+			return ((void *)dt);
+		}
+		else
+			*dt++ = *sc++;
+		n--;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (NULL);
 }
