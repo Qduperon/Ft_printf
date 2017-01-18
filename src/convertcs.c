@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 19:39:23 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:46:29 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ char	*ft_strprecision(char *str, t_form *form_struct)
 			tmp[i++] = ' ';
 		if (form_struct->mzflag != '-')
 			tmp = ft_strncat(tmp, str, form_struct->precision);
-		else
+		else if (form_struct->mzflag == '-')
 		{
 			str = strndup(str, form_struct->precision);
 			tmp = ft_strcat(str, tmp);
-			free(str);
 		}
 		return (tmp);
 	}
@@ -47,12 +46,20 @@ char	*ft_strpadding(char *str, t_form *form_struct)
 	char	*tmp;
 
 	i = 0;
+	printf("str\n");
 	space = form_struct->padding - (int) ft_strlen(str);
 	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 		return (NULL);
 	while (space-- > 0)
 		tmp[i++] = ' ';
-	ft_strcpy(&tmp[i], str);
+	if (form_struct->mzflag == '-')
+	{
+		str = strndup(str, form_struct->precision);
+		printf("str %s\n", str);
+		tmp = ft_strcat(str, tmp);
+	}
+	else
+		ft_strcpy(&tmp[i], str);
 	return (tmp);
 }
 
@@ -64,23 +71,22 @@ int		ft_s(va_list args, t_form *form_struct)
 
 	if (ft_strcmp(form_struct->length_mod, "l") == 0)
 		return (ft_S(args, form_struct));
-	if (!(str = va_arg(args, char *)))
-		return (0);
-	if (str == NULL)
-		str = "(null)"; //check if this works
-	// else
-	if (form_struct->precision == 0 && form_struct->padding == 0)
+	str = va_arg(args, char *);
+	// if (str == NULL)
+	// 	str = ft_strdup("(null)"); //check if this works
+	if ((form_struct->precision == -1 && form_struct->padding == 0) ||
+	form_struct->precision > (int) ft_strlen(str))
 	{
 		ft_putstr(str);
 		return (ft_strlen(str));
 	}
-	else if (form_struct->precision < (int) ft_strlen(str))
+	else if (form_struct->precision < (int) ft_strlen(str) && form_struct->precision != -1)
 		tmp = ft_strprecision(str, form_struct);
 	else if (form_struct->padding > (int) ft_strlen(str))
 		tmp = ft_strpadding(str, form_struct);
 	ft_putstr(tmp);
 	len = (int) ft_strlen(tmp);
-	free (tmp);
+	// free (tmp);
 	return (len);
 }
 

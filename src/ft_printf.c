@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:05 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 19:39:06 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/18 14:41:51 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_form	*struct_init(void)
 	form_struct->spflag = '\0';
 	form_struct->pflag = '\0';
 	form_struct->length_mod = "\0";
-	form_struct->precision = 0;
+	form_struct->precision = -1;
 	form_struct->padding = 0;
 	return (form_struct);
 }

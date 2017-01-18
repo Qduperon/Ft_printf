@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:29 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 19:39:30 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:42:54 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	ft_prec_pad(t_form *form_struct, char *format, int *i)
 		form_struct->precision = ft_atoi(&format[*i]);
 		while (format[*i] >= '0' && format[*i] <= '9')
 			(*i)++;
+	}
+	else if (format[*i] >= '.')
+	{
+		(*i)++;
+		form_struct->precision = 0;
 	}
 	printf("precision: %d\n", form_struct->precision);
 	printf("padding: %d\n", form_struct->padding);
