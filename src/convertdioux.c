@@ -20,5 +20,11 @@ int		ft_convertint(long long nb, t_form *form_struct, char c)
 
 int		writeperct(char *c)
 {
+	int	len;
+
+	len = 0;
+	if (*c == '%')
+		ft_putchar('%');
+	while (*c != '')
 	return (0);
 }

@@ -38,7 +38,7 @@ static char	*ft_convert_base(int len, int sign, long long value, int base, char 
 {
 	char	*alphabet;
 
-	alphabet = "0123456789ABCDEF";
+	alphabet = "0123456789abcdef";
 	while (len + sign >= 0)
 	{
 		if (sign == 1)

@@ -22,11 +22,18 @@ char	*ft_strprecision(char *str, t_form *form_struct)
 	if (form_struct->padding > form_struct->precision)
 	{
 		space = form_struct->padding - form_struct->precision;
-		if (!(tmp = malloc(sizeof(char *) * (form_struct->padding + 1))))
+		if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 			return (NULL);
 		while (space-- > 0)
 			tmp[i++] = ' ';
-		tmp = ft_strncat(tmp, str, form_struct->precision);
+		if (form_struct->mzflag != '-')
+			tmp = ft_strncat(tmp, str, form_struct->precision);
+		else
+		{
+			str = strndup(str, form_struct->precision);
+			tmp = ft_strcat(str, tmp);
+			free(str);
+		}
 		return (tmp);
 	}
 	else
@@ -59,8 +66,8 @@ int		ft_s(va_list args, t_form *form_struct)
 		return (ft_S(args, form_struct));
 	if (!(str = va_arg(args, char *)))
 		return (0);
-	// if (str == NULL)
-	// 	tmp = "(null)"; //check if this works
+	if (str == NULL)
+		str = "(null)"; //check if this works
 	// else
 	if (form_struct->precision == 0 && form_struct->padding == 0)
 	{

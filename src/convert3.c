@@ -26,7 +26,6 @@ int		ft_p(va_list args, t_form *form_struct)
 {
 	unsigned long	i;
 	int				len;
-	// char		*tmp;
 	char			*str;
 
 	i = (unsigned long) va_arg(args, void *);
