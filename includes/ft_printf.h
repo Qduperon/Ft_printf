@@ -6,7 +6,7 @@
 /*   By: qduperon <qduperon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 11:26:14 by qduperon          #+#    #+#             */
-/*   Updated: 2017/01/19 16:09:36 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:55:37 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ typedef struct		s_form
 
 t_form	*struct_init(void);
 int		ft_printf(const char *format, ...);
-int		ft_parse(const char *format, va_list *args);
-int		arg_parse (va_list *args, char *format, int *i);
+int		ft_parse(const char *format, va_list args);
+int		arg_parse (va_list args, char *format, int *i);
 void	ft_length_mod(t_form *form_struct, char *frmt, int *i);
 void	ft_prec_pad(t_form *form_struct, char *format, int *i);
 void	ft_flags(t_form *form_struct, char *format, int *i);
 char	*ft_strpadding(char *str, t_form *form_struct);
-int 	ft_conversion(t_form *form_struct, va_list *args, char *c, int i);
+int 	ft_conversion(t_form *form_struct, va_list args, char *c, int i);
 int		ft_S(va_list args, t_form *form_struct);
 int		ft_s(va_list args, t_form *form_struct);
 int		ft_C(va_list args, t_form *form_struct);
 int		ft_c(va_list args, t_form *form_struct);
 int		ft_p(va_list args, t_form *form_struct);
-int		ft_convertint(long long nb, t_form *form_struct, char c);
+int		ft_convertint(va_list args, t_form *form_struct, char c);
 int		isflag(char c);
 int		islmodifier(char *c);
 int		writeperct(char *c);

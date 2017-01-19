@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:05 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/18 14:41:51 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:55:02 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_form	*struct_init(void)
 	return (form_struct);
 }
 
-int		arg_parse (va_list *args, char *format, int *i)
+int		arg_parse (va_list args, char *format, int *i)
 {
 	int		len;
 	t_form	*form_struct;
@@ -50,7 +50,7 @@ int		arg_parse (va_list *args, char *format, int *i)
 	return (len);
 }
 
-int		ft_parse(const char *format, va_list *args)
+int		ft_parse(const char *format, va_list args)
 {
 	int		i;
 	int		len;
@@ -82,7 +82,7 @@ int		ft_printf(const char *format, ...)
 	if (format)
 	{
 		va_start(args, format);
-		len = (ft_parse(format, &args));
+		len = (ft_parse(format, args));
 		va_end(args);
 	}
 	return (len);

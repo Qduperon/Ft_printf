@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 18:47:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:50:13 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/19 18:15:43 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ char		*ft_lltoa_base(long long value, int base)
 	if (base < 2 || base > 16)
 		return (NULL);
 	len = ft_intlen(value, base);
-	if (value == -2147483648)
-		return  ("-2147483648");
+	if (value < -9223372036854775807)
+		return  ("-9223372036854775808");
 	if (value < 0)
 	{
 		value *= -1;

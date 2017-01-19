@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:09 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/19 15:53:37 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:14:11 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*ft_convert_base(int len, int sign, int value, int base, char *str)
 {
 	char *alphabet;
 
-	alphabet = "0123456789abcdef";
+	alphabet = "0123456789ABCDEF";
 	while (len + sign >= 0)
 	{
 		if (sign == 1)
@@ -39,8 +39,8 @@ char		*ft_itoa_base(int value, int base)
 	if (base < 2 || base > 16)
 		return (NULL);
 	len = ft_base_size(value, base);
-	if (value < -9223372036854775807)
-		return  ("-9223372036854775808");
+	if (value == -2147483648)
+		return  ("-2147483648");
 	if (value < 0)
 	{
 		value *= -1;

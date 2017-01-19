@@ -4,8 +4,8 @@
 
 int		main(void)
 {
-	printf("\ndis is mine : %d\n", ft_printf("%s", "hello"));
-	printf("\nze original : %d", printf("%s", "hello"));
+	printf("\ndis is mine : %d\n", ft_printf("%x", 17));
+	printf("\nze original : %d", printf("%x", 17));
 	// printf("\n%d", printf("%p, %#x", malloc(1), 154654));
 	// printf("\n%d", printf("%16p", "hello"));
 	//printf("\n%d", printf("%+20hhd", 90));

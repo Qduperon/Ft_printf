@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/19 16:17:57 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/19 18:15:58 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ char	*filltmp(long long nbr, char c)
 	return (str);
 }
 
-int		ft_convertint(long long nbr, t_form *form_struct, char c)
+int		ft_convertint(va_list args, t_form *form_struct, char c)
 {
 	char	*tmp;
+	long long nbr;
 
+	nbr = va_arg(args, long long);
 	tmp = filltmp(nbr, c);
-	ft_putchar(c);
 	ft_putstr(tmp);
 
-	return (0);
+	return (1);
 }
 
 int		writeperct(char *c)
