@@ -46,7 +46,6 @@ char	*ft_strpadding(char *str, t_form *form_struct)
 	char	*tmp;
 
 	i = 0;
-	printf("str\n");
 	space = form_struct->padding - (int) ft_strlen(str);
 	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 		return (NULL);
@@ -73,7 +72,10 @@ int		ft_s(va_list args, t_form *form_struct)
 		return (ft_S(args, form_struct));
 	str = va_arg(args, char *);
 	// if (str == NULL)
-	// 	str = ft_strdup("(null)"); //check if this works
+	// {
+	// 	str = "(null)"; //check if this works
+	// 	printf("str\n");
+	// }
 	if ((form_struct->precision == -1 && form_struct->padding == 0) ||
 	form_struct->precision > (int) ft_strlen(str))
 	{
@@ -112,4 +114,20 @@ int		ft_c(va_list args, t_form *form_struct)
 	else
 		write(1, &str, 1);
 	return (i);
+}
+
+int		ft_p(va_list args, t_form *form_struct)
+{
+	unsigned long	i;
+	int				len;
+	char			*str;
+
+	i = (unsigned long) va_arg(args, void *);
+	len = 0;
+	str = ft_strjoin("0x", ft_lltoa_base(i, 16));
+	if (form_struct->padding > ft_strlen(str))
+		str = ft_strpadding(str, form_struct);
+	ft_putstr(str);
+	len = ft_strlen(str);
+	return(len);
 }
