@@ -6,13 +6,13 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/18 14:26:19 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:17:57 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		ft_lmodifer()
+char	*filltmp(long long nbr, char c)
 {
 	char *str;
 
@@ -29,12 +29,17 @@ int		ft_lmodifer()
 		ft_strtoupper(str);
 	}
 	else if (c == 'o' || c == 'O')
-		str = ft_lltoao(nbr);
-	return (str;)
+		str = ft_lltoa_base(nbr, 8);
+	return (str);
 }
 
-int		ft_convertint(long long nb, t_form *form_struct, char c)
+int		ft_convertint(long long nbr, t_form *form_struct, char c)
 {
+	char	*tmp;
+
+	tmp = filltmp(nbr, c);
+	ft_putchar(c);
+	ft_putstr(tmp);
 
 	return (0);
 }
