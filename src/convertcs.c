@@ -26,11 +26,12 @@ char	*ft_strprecision(char *str, t_form *form_struct)
 			return (NULL);
 		while (space-- > 0)
 			tmp[i++] = ' ';
+		tmp[i] = '\0';
 		if (form_struct->mzflag != '-')
 			tmp = ft_strncat(tmp, str, form_struct->precision);
 		else if (form_struct->mzflag == '-')
 		{
-			str = strndup(str, form_struct->precision);
+			str = ft_strndup(str, form_struct->precision);
 			tmp = ft_strcat(str, tmp);
 		}
 		return (tmp);
@@ -53,8 +54,7 @@ char	*ft_strpadding(char *str, t_form *form_struct)
 		tmp[i++] = ' ';
 	if (form_struct->mzflag == '-')
 	{
-		str = strndup(str, form_struct->precision);
-		printf("str %s\n", str);
+		str = ft_strndup(str, form_struct->precision);
 		tmp = ft_strcat(str, tmp);
 	}
 	else
@@ -88,7 +88,7 @@ int		ft_s(va_list args, t_form *form_struct)
 		tmp = ft_strpadding(str, form_struct);
 	ft_putstr(tmp);
 	len = (int) ft_strlen(tmp);
-	// free (tmp);
+	// free(tmp);
 	return (len);
 }
 
@@ -124,10 +124,14 @@ int		ft_p(va_list args, t_form *form_struct)
 
 	i = (unsigned long) va_arg(args, void *);
 	len = 0;
-	str = ft_strjoin("0x", ft_lltoa_base(i, 16));
+	if (form_struct->precision == 0)
+		str = ft_strdup("0x");
+	else
+		str = ft_strjoin("0x", ft_lltoa_base(i, 16));
 	if (form_struct->padding > ft_strlen(str))
 		str = ft_strpadding(str, form_struct);
 	ft_putstr(str);
 	len = ft_strlen(str);
+	free(str);
 	return(len);
 }
