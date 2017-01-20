@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:29 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/19 17:56:00 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:45:49 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	ft_flags(t_form *form_struct, char *format, int *i)
 			form_struct->pflag = '#';
 		(*i)++;
 	}
-	printf("spflag :%c\n", form_struct->spflag);
-	printf("mzflag :%c\n", form_struct->mzflag);
-	printf("pflag :%c\n", form_struct->pflag);
+	// printf("spflag :%c\n", form_struct->spflag);
+	// printf("mzflag :%c\n", form_struct->mzflag);
+	// printf("pflag :%c\n", form_struct->pflag);
 }
 
 void	ft_prec_pad(t_form *form_struct, char *format, int *i)
@@ -52,8 +52,8 @@ void	ft_prec_pad(t_form *form_struct, char *format, int *i)
 		(*i)++;
 		form_struct->precision = 0;
 	}
-	printf("precision: %d\n", form_struct->precision);
-	printf("padding: %d\n", form_struct->padding);
+	// printf("precision: %d\n", form_struct->precision);
+	// printf("padding: %d\n", form_struct->padding);
 }
 
 void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
@@ -82,7 +82,7 @@ void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
 			form_struct->length_mod = "z";
 		(*i)++;
 	}
-	printf("length mod: %s\n", form_struct->length_mod);
+	// printf("length mod: %s\n", form_struct->length_mod);
 }
 
 int 	ft_conversion(t_form *form_struct, va_list args, char *c, int i)
@@ -104,7 +104,7 @@ int 	ft_conversion(t_form *form_struct, va_list args, char *c, int i)
 			return (convert[i])(args, form_struct);
 		i++;
 	}
-	if (c[0] == '%' || ft_isprint(c[0]))
-		return (writeperct(c));
+	if (c[0] == '%')
+		return (writeperct(c, form_struct));
 	return (0);
 }

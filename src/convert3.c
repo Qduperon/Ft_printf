@@ -6,11 +6,21 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 19:39:15 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:40:27 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+int		bytelen(wchar_t c)
+{
+	int		i;
+
+	i = 0;
+	while (c >> 1)
+		i++;
+	return (i);
+}
 
 int		ft_S(va_list args, t_form *form_struct)
 {
@@ -30,4 +40,29 @@ int		ft_C(va_list args, t_form *form_struct)
 	i = 0;
 	str = va_arg(args, wchar_t);
 	return (0);
+}
+
+int		writeperct(char *c, t_form *form_struct)
+{
+	int		len;
+	int 	i;
+	char	*tmp;
+
+	len = 1;
+	i = 0;
+	tmp = ft_strdup("%");
+	while (c[i] && c[i] != '%')
+	{
+		tmp = ft_strcat(tmp, &c[i]);
+		len++;
+	}
+	if (form_struct->padding > ft_strlen(tmp))
+	{
+		form_struct->precision = ft_strlen(tmp);
+		tmp = ft_strpadding(tmp, form_struct);
+	}
+	ft_putstr(tmp);
+	len = ft_strlen(tmp);
+	free(tmp);
+	return (len);
 }
