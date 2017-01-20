@@ -70,12 +70,8 @@ int		ft_s(va_list args, t_form *form_struct)
 
 	if (ft_strcmp(form_struct->length_mod, "l") == 0)
 		return (ft_S(args, form_struct));
-	str = va_arg(args, char *);
-	// if (str == NULL)
-	// {
-	// 	str = "(null)"; //check if this works
-	// 	printf("str\n");
-	// }
+	if(!(str = va_arg(args, char *)))
+		str = "(null)";
 	if ((form_struct->precision == -1 && form_struct->padding == 0) ||
 	form_struct->precision > (int) ft_strlen(str))
 	{
@@ -94,8 +90,8 @@ int		ft_s(va_list args, t_form *form_struct)
 
 int		ft_c(va_list args, t_form *form_struct)
 {
-	int		i;
-	char	*tmp;
+	int				i;
+	char			*tmp;
 	unsigned char	str;
 
 	i = 1;
@@ -104,9 +100,9 @@ int		ft_c(va_list args, t_form *form_struct)
 	str = (unsigned char)va_arg(args, wchar_t);
 	if (form_struct->padding > 1)
 	{
-		if (form_struct->precision != 0)
-			form_struct->precision = 0;
-		tmp = (ft_strpadding((char *)&str, form_struct)); //check if gives two chars instead of one
+		if (form_struct->precision != 1)
+			form_struct->precision = 1;
+		tmp = (ft_strpadding((char *)&str, form_struct));
 		ft_putstr(tmp);
 		i = ft_strlen(tmp);
 		free(tmp);
@@ -124,14 +120,17 @@ int		ft_p(va_list args, t_form *form_struct)
 
 	i = (unsigned long) va_arg(args, void *);
 	len = 0;
-	if (form_struct->precision == 0)
+	if (form_struct->precision == 0 && form_struct->padding == 0)
 		str = ft_strdup("0x");
 	else
+	{
 		str = ft_strjoin("0x", ft_lltoa_base(i, 16));
+		form_struct->precision = ft_strlen(str);
+	}
 	if (form_struct->padding > ft_strlen(str))
 		str = ft_strpadding(str, form_struct);
 	ft_putstr(str);
 	len = ft_strlen(str);
-	free(str);
+	// free(str);
 	return(len);
 }
