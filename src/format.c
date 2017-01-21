@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:29 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/20 17:45:49 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/21 18:05:44 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ int 	ft_conversion(t_form *form_struct, va_list args, char *c, int i)
 	while (conversion[i])
 	{
 		if (conversion[i] == c[0] && (i >= 5))
-			return (ft_convertint(args, form_struct, c[0]));
+		{
+			// if (form_struct->length_mod != '\0')
+			// 	return (ft_add_lmod(form_struct, args));
+			// else
+				return (ft_convertint(args, form_struct, c[0]));
+		}
 		else if (conversion[i] == c[0])
 			return (convert[i])(args, form_struct);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: qduperon <qduperon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 11:26:14 by qduperon          #+#    #+#             */
-/*   Updated: 2017/01/20 17:46:24 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/21 18:05:06 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		ft_convertint(va_list args, t_form *form_struct, char c);
 int		isflag(char c);
 int		islmodifier(char *c);
 int		writeperct(char *c, t_form *form_struct);
+int		ft_add_lmod(t_form *form_struct, va_list args);
 
 #endif

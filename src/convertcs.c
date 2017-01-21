@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/18 17:46:29 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/21 21:24:38 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,6 @@ int		ft_p(va_list args, t_form *form_struct)
 		str = ft_strpadding(str, form_struct);
 	ft_putstr(str);
 	len = ft_strlen(str);
-	// free(str);
+	free(str);
 	return(len);
 }
