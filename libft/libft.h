@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 18:25:02 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/17 18:49:37 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 16:51:41 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int value, int base);
 char				*ft_lltoa_base(long long value, int base);
+char				*ft_ulltoa_base(unsigned long long value, int base);
 char				*ft_strtolower(char *str);
 char				*ft_strtoupper(char *str);
 char				*ft_strnstr(const char *haystack,

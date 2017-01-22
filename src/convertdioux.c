@@ -6,19 +6,17 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 18:28:30 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 19:00:23 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-char	*ft_nbrpadding(char *str, t_form *form_struct)
+static char	*ft_nbrpadding(char *str, t_form *form_struct, int i)
 {
 	char	*tmp;
 	int		extra;
-	int		i;
 
-	i = 0;
 	extra = form_struct->padding - ((int)ft_strlen(str));
 	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 		return (NULL);
@@ -34,12 +32,15 @@ char	*ft_nbrpadding(char *str, t_form *form_struct)
 		while (i < extra)
 			tmp[i++] = ' ';
 		tmp[i] = '\0';
-		form_struct->mzflag == '-' ? (tmp = ft_strcat(str, tmp)) : (tmp = ft_strcat(tmp, str));
+		if (form_struct->mzflag == '-')
+			tmp = ft_strcat(str, tmp);
+		else
+			tmp = ft_strcat(tmp, str);
 	}
 	return (tmp);
 }
 
-char	*ft_addprefix(char *str, t_form *form_struct, char c)
+static char	*ft_addprefix(char *str, t_form *form_struct, char c)
 {
 	char *tmp;
 	char *nbr;
@@ -67,7 +68,7 @@ char	*ft_addprefix(char *str, t_form *form_struct, char c)
 	return (str);
 }
 
-char	*ft_nbrprecision(char *str, t_form *form_struct)
+static char	*ft_nbrprecision(char *str, t_form *form_struct)
 {
 	char	*tmp;
 	int		i;
@@ -90,7 +91,7 @@ char	*ft_nbrprecision(char *str, t_form *form_struct)
 	return (str);
 }
 
-int		ft_convertint(long long nbr, t_form *form_struct, char c)
+int			ft_convertint(long long nbr, t_form *form_struct, char c)
 {
 	char		*tmp;
 	int			len;
@@ -103,9 +104,8 @@ int		ft_convertint(long long nbr, t_form *form_struct, char c)
 	tmp = ft_nbrprecision(tmp, form_struct);
 	tmp = ft_addprefix(tmp, form_struct, c);
 	if (form_struct->padding > ft_strlen(tmp))
-		tmp = ft_nbrpadding(tmp, form_struct);
+		tmp = ft_nbrpadding(tmp, form_struct, 0);
 	ft_putstr(tmp);
 	len = ft_strlen(tmp);
-	// free(tmp);
 	return (len);
 }

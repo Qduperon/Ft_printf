@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertcs.c                                        :+:      :+:    :+:   */
+/*   convertcsp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/21 21:24:38 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:57:45 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strpadding(char *str, t_form *form_struct)
 	char	*tmp;
 
 	i = 0;
-	space = form_struct->padding - (int) ft_strlen(str);
+	space = form_struct->padding - (int)ft_strlen(str);
 	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 		return (NULL);
 	while (space-- > 0)
@@ -69,22 +69,22 @@ int		ft_s(va_list args, t_form *form_struct)
 	int		len;
 
 	if (ft_strcmp(form_struct->length_mod, "l") == 0)
-		return (ft_S(args, form_struct));
-	if(!(str = va_arg(args, char *)))
+		return (ft_ls(args, form_struct));
+	if (!(str = va_arg(args, char *)))
 		str = "(null)";
 	if ((form_struct->precision == -1 && form_struct->padding == 0) ||
-	form_struct->precision > (int) ft_strlen(str))
+	form_struct->precision > (int)ft_strlen(str))
 	{
 		ft_putstr(str);
 		return (ft_strlen(str));
 	}
-	else if (form_struct->precision < (int) ft_strlen(str) && form_struct->precision != -1)
+	else if (form_struct->precision < (int)ft_strlen(str) &&
+	form_struct->precision != -1)
 		tmp = ft_strprecision(str, form_struct);
-	else if (form_struct->padding > (int) ft_strlen(str))
+	else if (form_struct->padding > (int)ft_strlen(str))
 		tmp = ft_strpadding(str, form_struct);
 	ft_putstr(tmp);
-	len = (int) ft_strlen(tmp);
-	// free(tmp);
+	len = (int)ft_strlen(tmp);
 	return (len);
 }
 
@@ -96,7 +96,7 @@ int		ft_c(va_list args, t_form *form_struct)
 
 	i = 1;
 	if (ft_strcmp(form_struct->length_mod, "l") == 0)
-		return (ft_C(args, form_struct));
+		return (ft_lc(args, form_struct));
 	str = (unsigned char)va_arg(args, wchar_t);
 	if (form_struct->padding > 1)
 	{
@@ -118,7 +118,7 @@ int		ft_p(va_list args, t_form *form_struct)
 	int				len;
 	char			*str;
 
-	i = (unsigned long) va_arg(args, void *);
+	i = (unsigned long)va_arg(args, void *);
 	len = 0;
 	if (form_struct->precision == 0 && form_struct->padding == 0)
 		str = ft_strdup("0x");
@@ -130,7 +130,7 @@ int		ft_p(va_list args, t_form *form_struct)
 	if (form_struct->padding > ft_strlen(str))
 		str = ft_strpadding(str, form_struct);
 	ft_putstr(str);
-	len = ft_strlen(str);
+	len = (int)ft_strlen(str);
 	free(str);
-	return(len);
+	return (len);
 }

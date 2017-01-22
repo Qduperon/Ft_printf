@@ -3,63 +3,66 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qduperon <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/06/16 13:22:36 by qduperon          #+#    #+#              #
-#    Updated: 2016/12/07 11:35:21 by qduperon         ###   ########.fr        #
+#    Created: 2016/11/04 14:17:48 by spalmaro          #+#    #+#              #
+#    Updated: 2017/01/22 20:46:40 by spalmaro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#==============================================================================#
-#                               // NAME \\                                     #
-#==============================================================================#
+NAME = libftprintf.a
 
-NAME = libftprintf.a 
+LIB = 	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c          \
+		ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c           \
+		ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c ft_strchr.c        \
+		ft_strrchr.c ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c        \
+		ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c         \
+		ft_isprint.c ft_toupper.c ft_tolower.c ft_memalloc.c ft_memdel.c      \
+		ft_strnew.c ft_strdel.c ft_strclr.c ft_striter.c ft_striteri.c        \
+		ft_strmap.c ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c         \
+		ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar.c        \
+		ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c   \
+		ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
+		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_base_size.c ft_strtoupper.c \
+		ft_strtolower.c ft_ulltoa_base.c ft_lltoa_base ft_itoa_base.c
 
-#==============================================================================#
-#                           //  SOURCES  \\                                    #
-#==============================================================================#
+C_FILES = ft_printf.c ft_is.c format.c ft_add_lmod.c convertdioux.c \
+			convertcsp.c convertplcls.c \
 
-SRCS = srcs/
+LIB_PATH = -I libft/
 
-#==============================================================================#
-#                             // OBJECTS \\                                    #
-#==============================================================================#
+SRC_PATH = src/
 
-OBJ = $(SRCS:.c=.o)
+LIB_O = $(LIB:.c=.o)
 
-#==============================================================================#
-#                             //  FLAGS  \\                                    #
-#==============================================================================#
+SRC_O = $(C_FILES:.c=.o)
 
-FLAGS = -Wall -Werror -Wextra
+HEADER_FLAG = -I includes/
 
-#==============================================================================#
-#                            // COMPILATION \\                                 #
-#==============================================================================#
+LIB = libft/libft.a
+
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror
+
+.PHONY : all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C libft
-	ar rc $(OBJ) libft/libft.a $(NAME)
-
-#==============================================================================#
-#                              // DELETING \\                                  #
-#==============================================================================#
+$(NAME):
+	make -C $(LIB_PATH)
+	$(CC) -c $(CFLAGS) $(C_FILES) $(HEADER_FLAG) $(LIB_PATH) $($SRC_PATH)
+	ar -rc $(NAME) $(addprefix $(SRC_PATH), $(SRC_O)) $(addprefix $(LIB_PATH), $(LIB_O)))
+	make $(LIBFT)
+	$(CC) -c $(CFLAGS) $(C_FILES) $(HEADER_FLAG) -I libft/
+	ar rc $(NAME) $(OBJ_NAME) $(LIB)
+	ranlib $(NAME)
 
 clean:
-	make clean -C libft
-	rm -f $(OBJ)
+	make clean $(LIBFT)
 
-fclean: clean
-	make fclean -C libft
-	rm -f $(NAME)
-
-#==============================================================================#
-#                             // RETRY \\                                      #
-#==============================================================================#
+fclean:
+	make fclean $(LIBFT)
+	@rm -f $(NAME)
 
 re: fclean all
-
-.PHONY : all clean fclean re

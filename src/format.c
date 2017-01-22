@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:29 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 16:53:33 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:59:37 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void	ft_flags(t_form *form_struct, char *format, int *i)
 			form_struct->pflag = '#';
 		(*i)++;
 	}
-	// printf("spflag :%c\n", form_struct->spflag);
-	// printf("mzflag :%c\n", form_struct->mzflag);
-	// printf("pflag :%c\n", form_struct->pflag);
 }
 
 void	ft_prec_pad(t_form *form_struct, char *format, int *i)
@@ -52,8 +49,6 @@ void	ft_prec_pad(t_form *form_struct, char *format, int *i)
 		(*i)++;
 		form_struct->precision = 0;
 	}
-	// printf("precision: %d\n", form_struct->precision);
-	// printf("padding: %d\n", form_struct->padding);
 }
 
 void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
@@ -82,20 +77,19 @@ void	ft_length_mod(t_form *form_struct, char *frmt, int *i)
 			form_struct->length_mod = "z";
 		(*i)++;
 	}
-	// printf("length mod: %s\n", form_struct->length_mod);
 }
 
-int 	ft_conversion(t_form *form_struct, va_list args, char *c, int i)
+int		ft_conversion(t_form *form_struct, va_list args, char *c, int i)
 {
 	int		(*convert[5])(va_list, t_form*);
 	char	*conversion;
 
 	conversion = "sSpcCdDioOuUxX";
 	convert[0] = &ft_s;
-	convert[1] = &ft_S;
+	convert[1] = &ft_ls;
 	convert[2] = &ft_p;
 	convert[3] = &ft_c;
-	convert[4] = &ft_C;
+	convert[4] = &ft_lc;
 	while (conversion[i])
 	{
 		if (conversion[i] == c[0] && (i >= 5))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertpCS.c                                       :+:      :+:    :+:   */
+/*   convertplcls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 16:57:43 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:58:50 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		bytelen(wchar_t c)
 	return (i);
 }
 
-int		ft_S(va_list args, t_form *form_struct)
+int		ft_ls(va_list args, t_form *form_struct)
 {
 	int			i;
 	wchar_t		*str;
@@ -32,7 +32,7 @@ int		ft_S(va_list args, t_form *form_struct)
 	return (0);
 }
 
-int		ft_C(va_list args, t_form *form_struct)
+int		ft_lc(va_list args, t_form *form_struct)
 {
 	int			i;
 	wchar_t		str;
@@ -45,7 +45,7 @@ int		ft_C(va_list args, t_form *form_struct)
 int		writeperct(char *c, t_form *form_struct)
 {
 	int		len;
-	int 	i;
+	int		i;
 	char	*tmp;
 
 	len = 1;

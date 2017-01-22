@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:05 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/19 17:55:02 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:48:57 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_form	*struct_init(void)
 	return (form_struct);
 }
 
-int		arg_parse (va_list args, char *format, int *i)
+int		arg_parse(va_list args, char *format, int *i)
 {
 	int		len;
 	t_form	*form_struct;
@@ -46,7 +46,7 @@ int		arg_parse (va_list args, char *format, int *i)
 			break ;
 		}
 	}
-	free (form_struct);
+	free(form_struct);
 	return (len);
 }
 

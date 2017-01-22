@@ -1,54 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_ulltoa_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/17 19:39:09 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 19:05:10 by spalmaro         ###   ########.fr       */
+/*   Created: 2017/01/17 18:47:14 by spalmaro          #+#    #+#             */
+/*   Updated: 2017/01/22 19:02:57 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_convert_base(int sign, int value, int base)
+static int		ft_intlen(unsigned long long nbr, int base)
+{
+	int		len;
+
+	len = 1;
+	while (nbr >= (unsigned long long)base)
+	{
+		len++;
+		nbr = nbr / base;
+	}
+	return (len);
+}
+
+static char		*ft_convert_base(int len, unsigned long long value,
+	int base, char *str)
 {
 	char	*alphabet;
-	int		len;
-	char	*str;
 
-	alphabet = "0123456789ABCDEF";
-	len = ft_base_size(value, base);
-	if (!(str = (char *)malloc(sizeof(char) * (len + sign + 1))))
-		return (NULL);
-	str[len] = '\0';
-	while (len + sign >= 0)
+	alphabet = "0123456789abcdef";
+	while (len >= 0)
 	{
-		if (sign == 1)
-		{
-			str[0] = '-';
-		}
 		str[--len] = alphabet[(value % base)];
 		value /= base;
 	}
 	return (str);
 }
 
-char			*ft_itoa_base(int value, int base)
+char			*ft_ulltoa_base(unsigned long long value, int base)
 {
-	int		sign;
+	int		len;
+	char	*str;
 
-	sign = 0;
 	if (base < 2 || base > 16)
 		return (NULL);
-	if (value == -2147483648)
-		return ("-2147483648");
-	if (value < 0)
-	{
-		value *= -1;
-		if (base == 10)
-			sign = 1;
-	}
-	return (ft_convert_base(sign, value, base));
+	len = ft_intlen(value, base);
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	str[len] = '\0';
+	return (ft_convert_base(len, value, base, str));
 }
