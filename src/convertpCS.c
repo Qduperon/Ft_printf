@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert3.c                                         :+:      :+:    :+:   */
+/*   convertpCS.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/21 20:20:26 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 16:57:43 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ int		ft_C(va_list args, t_form *form_struct)
 	i = 0;
 	str = va_arg(args, wchar_t);
 	return (0);
-}
-
-int		ft_add_lmod(t_form *form_struct, va_list args)
-{
-	return (1);
 }
 
 int		writeperct(char *c, t_form *form_struct)

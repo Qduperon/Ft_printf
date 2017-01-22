@@ -6,7 +6,7 @@
 #    By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:17:48 by spalmaro          #+#    #+#              #
-#    Updated: 2016/11/05 16:41:33 by spalmaro         ###   ########.fr        #
+#    Updated: 2017/01/22 17:08:53 by spalmaro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	rm -fv $(OBJ_NAME)
+	rm -f $(OBJ_NAME)
 
 fclean: clean
-	rm -fv $(NAME)
+	rm -f $(NAME)
 
 re: fclean all

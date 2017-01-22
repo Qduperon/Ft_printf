@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/21 21:47:10 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/22 18:28:30 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_nbrpadding(char *str, t_form *form_struct)
 	int		i;
 
 	i = 0;
-	extra = form_struct->padding - (ft_strlen(str));
+	extra = form_struct->padding - ((int)ft_strlen(str));
 	if (!(tmp = malloc(sizeof(char *) * (form_struct->padding))))
 		return (NULL);
 	if (form_struct->mzflag == '0' && form_struct->precision == -1)
@@ -27,7 +27,7 @@ char	*ft_nbrpadding(char *str, t_form *form_struct)
 		while (i < extra)
 			tmp[i++] = '0';
 		tmp[i] = '\0';
-		tmp = ft_strcpy(&tmp[i], str);
+		tmp = ft_strcat(tmp, str);
 	}
 	else
 	{
@@ -73,11 +73,11 @@ char	*ft_nbrprecision(char *str, t_form *form_struct)
 	int		i;
 	int		zeros;
 
-	if (form_struct->precision > ft_strlen(str))
+	if (form_struct->precision > (int)ft_strlen(str))
 	{
 		i = 0;
-		zeros = form_struct->precision - (ft_strlen(str));
-		if (!(tmp = malloc(sizeof(char *) * (ft_strlen(str) + zeros))))
+		zeros = form_struct->precision - ((int)ft_strlen(str));
+		if (!(tmp = malloc(sizeof(char *) * ((int)ft_strlen(str) + zeros))))
 			return (NULL);
 		if (str[0] == '-')
 			tmp[i++] = '-';
@@ -90,42 +90,22 @@ char	*ft_nbrprecision(char *str, t_form *form_struct)
 	return (str);
 }
 
-char	*filltmp(long long nbr, char c)
-{
-	char *str;
-
-	str = NULL;
-	if (c == 'd' || c == 'D' || c == 'i')
-		str = ft_lltoa_base(nbr, 10);
-	else if (c == 'u' || c == 'U')
-		str = ft_lltoa_base((unsigned long long)nbr, 10);
-	else if (c == 'x')
-		str = ft_lltoa_base(nbr, 16);
-	else if (c == 'X')
-	{
-		str = ft_lltoa_base(nbr, 16);
-		ft_strtoupper(str);
-	}
-	else if (c == 'o' || c == 'O')
-		str = ft_lltoa_base(nbr, 8);
-	return (str);
-}
-
-int		ft_convertint(va_list args, t_form *form_struct, char c)
+int		ft_convertint(long long nbr, t_form *form_struct, char c)
 {
 	char		*tmp;
 	int			len;
-	long long	nbr;
 
-	nbr = va_arg(args, long long);
 	len = 0;
-	tmp = filltmp(nbr, c);
+	c == 'D' ? (form_struct->length_mod = "l") : 0;
+	c == 'O' ? (form_struct->length_mod = "l") : 0;
+	c == 'U' ? (form_struct->length_mod = "l") : 0;
+	tmp = ft_add_lmod(form_struct, nbr, c);
 	tmp = ft_nbrprecision(tmp, form_struct);
 	tmp = ft_addprefix(tmp, form_struct, c);
 	if (form_struct->padding > ft_strlen(tmp))
 		tmp = ft_nbrpadding(tmp, form_struct);
 	ft_putstr(tmp);
 	len = ft_strlen(tmp);
-	free(tmp);
+	// free(tmp);
 	return (len);
 }
