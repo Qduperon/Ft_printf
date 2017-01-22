@@ -121,8 +121,8 @@ int		ft_convertint(va_list args, t_form *form_struct, char c)
 	len = 0;
 	tmp = filltmp(nbr, c);
 	tmp = ft_nbrprecision(tmp, form_struct);
-	tmp = ft_addprefix(tmp, form_struct, c)
-	if (form_struct->padding > ft_strlen(tmp)))
+	tmp = ft_addprefix(tmp, form_struct, c);
+	if (form_struct->padding > ft_strlen(tmp))
 		tmp = ft_nbrpadding(tmp, form_struct);
 	ft_putstr(tmp);
 	len = ft_strlen(tmp);
