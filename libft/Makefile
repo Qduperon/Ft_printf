@@ -6,7 +6,7 @@
 #    By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:17:48 by spalmaro          #+#    #+#              #
-#    Updated: 2017/01/22 17:08:53 by spalmaro         ###   ########.fr        #
+#    Updated: 2017/01/23 21:21:15 by spalmaro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,14 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):
-	$(CC) -c $(CFLAGS) $(C_FILES) $(HEADER_FLAG)
-	ar rc $(NAME) $(OBJ_NAME)
-	ranlib $(NAME)
+	@$(CC) -c $(CFLAGS) $(C_FILES) $(HEADER_FLAG)
+	@ar rc $(NAME) $(OBJ_NAME)
+	@ranlib $(NAME)
 
 clean:
-	rm -f $(OBJ_NAME)
+	@rm -f $(OBJ_NAME)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

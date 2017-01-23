@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 18:47:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 19:04:35 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/23 22:00:54 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ static int		ft_intlen(long long nbr, int base)
 	return (len + sign);
 }
 
-static char		*ft_convert_base(int sign, long long value, int base)
+static char		*ft_convert_base(int sign, int len, long long value, int base)
 {
 	char	*str;
 	char	*alphabet;
-	int		len;
 
 	alphabet = "0123456789abcdef";
-	len = ft_intlen(value, base);
 	if (!(str = (char *)malloc(sizeof(char) * (len + sign + 1))))
 		return (NULL);
 	str[len] = '\0';
@@ -59,17 +57,19 @@ static char		*ft_convert_base(int sign, long long value, int base)
 char			*ft_lltoa_base(long long value, int base)
 {
 	int		sign;
+	int		len;
 
 	sign = 0;
 	if (base < 2 || base > 16)
 		return (NULL);
 	if (value < -9223372036854775807)
 		return ("-9223372036854775808");
+	len = ft_intlen(value, base);
 	if (value < 0)
 	{
 		value *= -1;
 		if (base == 10)
 			sign = 1;
 	}
-	return (ft_convert_base(sign, value, base));
+	return (ft_convert_base(sign, len, value, base));
 }

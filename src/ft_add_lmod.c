@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/22 16:57:55 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 18:16:25 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/23 21:42:05 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*ft_add_lmod(t_form *form_struct, long long nbr, char c)
 	char *str;
 
 	str = NULL;
-	if (c != 'd' || c != 'i' || c != 'D')
+	if (c != 'd' && c != 'i' && c != 'D')
 		return (add_lmodoux(form_struct, nbr, c, str));
 	else if (ft_strcmp(form_struct->length_mod, "ll") == 0)
 		str = ft_lltoa_base((long long)nbr, 10);
@@ -60,6 +60,6 @@ char		*ft_add_lmod(t_form *form_struct, long long nbr, char c)
 	else if (ft_strcmp(form_struct->length_mod, "z") == 0)
 		str = ft_lltoa_base((signed long)nbr, 10);
 	else
-		str = ft_itoa((int)nbr);
+		str = ft_itoa_base((int)nbr, 10);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 19:00:23 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/23 22:55:06 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static char	*ft_nbrpadding(char *str, t_form *form_struct, int i)
 		return (NULL);
 	if (form_struct->mzflag == '0' && form_struct->precision == -1)
 	{
+		str[0] == '-' ? (tmp[i++] = '-') : 0;
 		while (i < extra)
 			tmp[i++] = '0';
 		tmp[i] = '\0';
@@ -52,14 +53,15 @@ static char	*ft_addprefix(char *str, t_form *form_struct, char c)
 	else if (form_struct->spflag == '+' && (c == 'd' || c == 'D' || c == 'i')
 	&& str[0] != '-')
 		tmp = "+";
-	if (form_struct->pflag == '#' && (ft_strcmp(str, "0") != 0))
+	if ((form_struct->pflag == '#' && (ft_strcmp(str, "0") != 0)) &&
+	form_struct->precision != 0)
 	{
 		c == 'x' ? (tmp = "0x") : 0;
 		c == 'X' ? (tmp = "0X") : 0;
 	}
 	if (form_struct->pflag == '#' && (c == 'o' || c == 'O'))
 		str[0] != '0' ? (tmp = "0") : 0;
-	if (tmp != NULL)
+	if (tmp != NULL || tmp != '\0')
 	{
 		nbr = str;
 		str = ft_strjoin(tmp, str);
@@ -88,6 +90,8 @@ static char	*ft_nbrprecision(char *str, t_form *form_struct)
 		tmp = ft_strcat(tmp, str);
 		return (tmp);
 	}
+	else if (form_struct->precision == 0)
+		return (ft_strnew(0));
 	return (str);
 }
 
@@ -103,7 +107,7 @@ int			ft_convertint(long long nbr, t_form *form_struct, char c)
 	tmp = ft_add_lmod(form_struct, nbr, c);
 	tmp = ft_nbrprecision(tmp, form_struct);
 	tmp = ft_addprefix(tmp, form_struct, c);
-	if (form_struct->padding > ft_strlen(tmp))
+	if (form_struct->padding > (int)ft_strlen(tmp))
 		tmp = ft_nbrpadding(tmp, form_struct, 0);
 	ft_putstr(tmp);
 	len = ft_strlen(tmp);
