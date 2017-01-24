@@ -1,48 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertplcls.c                                     :+:      :+:    :+:   */
+/*   convertp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/23 21:24:51 by spalmaro         ###   ########.fr       */
+/*   Created: 2017/01/24 17:13:48 by spalmaro          #+#    #+#             */
+/*   Updated: 2017/01/24 17:13:59 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		bytelen(wchar_t c)
-{
-	int		i;
-
-	i = 0;
-	while (c >> 1)
-		i++;
-	return (i);
-}
-
-int		ft_ls(va_list args, t_form *form_struct)
-{
-	int			i;
-	wchar_t		*str;
-
-	i = 0;
-	str = va_arg(args, wchar_t *);
-	(void)form_struct;
-	return (0);
-}
-
-int		ft_lc(va_list args, t_form *form_struct)
-{
-	int			i;
-	wchar_t		str;
-
-	i = 0;
-	str = va_arg(args, wchar_t);
-	(void)form_struct;
-	return (0);
-}
 
 int		writeperct(char *c, t_form *form_struct)
 {
@@ -61,7 +29,7 @@ int		writeperct(char *c, t_form *form_struct)
 	if (form_struct->padding > (int)ft_strlen(tmp))
 	{
 		form_struct->precision = (int)ft_strlen(tmp);
-		tmp = ft_strpadding(tmp, form_struct);
+		tmp = ft_strpadding(tmp, form_struct, 0);
 	}
 	ft_putstr(tmp);
 	len = ft_strlen(tmp);

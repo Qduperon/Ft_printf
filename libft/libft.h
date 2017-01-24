@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 18:25:02 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 16:51:41 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/24 21:22:54 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char				*ft_strtolower(char *str);
 char				*ft_strtoupper(char *str);
 char				*ft_strnstr(const char *haystack,
 					const char *needle, size_t len);
+int					bitlen(wchar_t c);
+int					ft_wcslen(wchar_t *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);

@@ -6,7 +6,7 @@
 #    By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 14:17:48 by spalmaro          #+#    #+#              #
-#    Updated: 2017/01/23 21:26:19 by spalmaro         ###   ########.fr        #
+#    Updated: 2017/01/24 21:22:41 by spalmaro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,10 @@ LIB_O = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o       \
 		ft_putendl_fd.o ft_putnbr_fd.o ft_lstnew.o ft_lstdelone.o ft_lstdel.o \
 		ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_base_size.o ft_strtoupper.o \
 		ft_strtolower.o ft_ulltoa_base.o ft_lltoa_base.o ft_itoa_base.o \
-		ft_strndup.o
+		ft_strndup.o bitlen.o ft_wcslen.o
 
 C_FILES = ft_printf.c ft_is.c format.c ft_add_lmod.c convertdioux.c \
-			convertcsp.c convertplcls.c \
+			convertcsp.c convertlcls.c convertp.c\
 
 LIB_PATH = -I ./libft/
 

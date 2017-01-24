@@ -6,7 +6,7 @@
 /*   By: qduperon <qduperon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 11:26:14 by qduperon          #+#    #+#             */
-/*   Updated: 2017/01/22 19:06:12 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:41:26 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				arg_parse (va_list args, char *format, int *i);
 void			ft_length_mod(t_form *form_struct, char *frmt, int *i);
 void			ft_prec_pad(t_form *form_struct, char *format, int *i);
 void			ft_flags(t_form *form_struct, char *format, int *i);
-char			*ft_strpadding(char *str, t_form *form_struct);
+char			*ft_strpadding(char *str, t_form *form_struct, int f);
 char			*ft_add_lmod(t_form *form_struct, long long nbr, char c);
 int				ft_conversion(t_form *form_struct,
 				va_list args, char *c, int i);

@@ -6,23 +6,23 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/23 22:55:06 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/24 17:02:34 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static char *check_mzpflag(char *str, char *tmp, int extra, int i)
+static char	*check_mzpflag(char *str, char *tmp, int extra, int i)
 {
 	if (ft_strncmp(str, "0x", 2) == 0 || ft_strncmp(str, "0X", 2) == 0)
 	{
 		tmp[i++] = '0';
-		(ft_strncmp(str, "0x", 2) == 0) ? (tmp[i++] = 'x') : (tmp[i++] = 'X');
+		tmp[i++] = ((ft_strncmp(str, "0x", 2) == 0) ? ('x') : ('X'));
 		extra += 2;
 	}
 	else if (str[0] == '-' || str[0] == '+')
 	{
-		(str[0] == '-') ? (tmp[i++] = '-') : (tmp[i++] = '+');
+		tmp[i++] = ((str[0] == '-') ? ('-') : ('+'));
 		extra++;
 	}
 	while (i < extra)
