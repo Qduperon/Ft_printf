@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/24 22:06:11 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/25 15:42:28 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*ft_strprecision(char *str, t_form *form_struct)
 		{
 			str = ft_strndup(str, form_struct->precision);
 			tmp = ft_strcat(str, tmp);
-			free(str);
 		}
 		return (tmp);
 	}
@@ -58,7 +57,6 @@ char	*ft_strpadding(char *str, t_form *form_struct, int f)
 	{
 		str = ft_strndup(str, form_struct->precision);
 		tmp = ft_strcat(str, tmp);
-		free(str);
 	}
 	else
 		ft_strcpy(&tmp[i], str);
@@ -90,7 +88,6 @@ int		ft_s(va_list args, t_form *form_struct)
 		tmp = ft_strpadding(str, form_struct, 0);
 	ft_putstr(tmp);
 	len = (int)ft_strlen(tmp);
-	tmp != NULL ? (free(tmp)) : 0;
 	return (len);
 }
 
@@ -138,6 +135,5 @@ int		ft_p(va_list args, t_form *form_struct)
 		str = ft_strpadding(str, form_struct, 0);
 	ft_putstr(str);
 	len = (int)ft_strlen(str);
-	str != NULL ? (free(str)) : 0;
 	return (len);
 }
