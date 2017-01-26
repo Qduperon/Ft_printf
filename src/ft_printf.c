@@ -46,7 +46,7 @@ int		arg_parse(va_list args, char *format, int *i)
 			break ;
 		}
 	}
-	free(form_struct);
+	//free(form_struct);
 	return (len);
 }
 

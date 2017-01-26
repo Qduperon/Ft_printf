@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/24 17:02:34 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:22:38 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ static char	*check_mzpflag(char *str, char *tmp, int extra, int i)
 		tmp[i++] = ((ft_strncmp(str, "0x", 2) == 0) ? ('x') : ('X'));
 		extra += 2;
 	}
-	else if (str[0] == '-' || str[0] == '+')
+	else if (str[0] == '-' || str[0] == '+' || str[0] == ' ')
 	{
-		tmp[i++] = ((str[0] == '-') ? ('-') : ('+'));
+		tmp[i] = ((str[0] == '-') ? ('-') : ('+'));
+		tmp[i] = ((str[0] == ' ') ? (' ') : tmp[i]);
+		i++;
 		extra++;
 	}
 	while (i < extra)
 		tmp[i++] = '0';
 	tmp[i] = '\0';
-	if (str[0] == '+' || str[0] == '-')
+	if (str[0] == '+' || str[0] == '-' || str[0] == ' ')
 		tmp = ft_strcat(tmp, str + 1);
 	else if (ft_strncmp(str, "0x", 2) == 0 || ft_strncmp(str, "0X", 2) == 0)
 		tmp = ft_strcat(tmp, str + 2);
@@ -84,7 +86,7 @@ static char	*ft_addprefix(char *str, t_form *form_struct, char c)
 	{
 		nbr = str;
 		str = ft_strjoin(tmp, str);
-		free(nbr);
+		//free(nbr);
 	}
 	return (str);
 }

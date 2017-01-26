@@ -33,6 +33,6 @@ int		writeperct(char *c, t_form *form_struct)
 	}
 	ft_putstr(tmp);
 	len = ft_strlen(tmp);
-	free(tmp);
+	//free(tmp);
 	return (len);
 }

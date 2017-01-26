@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/25 15:42:28 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/26 14:52:59 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		ft_s(va_list args, t_form *form_struct)
 	if (ft_strcmp(str, "") == 0)
 		tmp = ft_strpadding(str, form_struct, 0);
 	else if ((form_struct->precision == -1 && form_struct->padding == 0) ||
-	form_struct->precision > (int)ft_strlen(str))
+	(form_struct->precision > (int)ft_strlen(str) && form_struct->padding == 0))
 	{
 		ft_putstr(str);
 		return (ft_strlen(str));
@@ -110,7 +110,7 @@ int		ft_c(va_list args, t_form *form_struct)
 		ft_putstr(tmp);
 		i = ft_strlen(tmp);
 		(str == 0) ? (i++) : 0;
-		free(tmp);
+		//free(tmp);
 	}
 	else
 		write(1, &str, 1);
