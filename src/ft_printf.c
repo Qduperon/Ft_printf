@@ -14,39 +14,39 @@
 
 t_form	*struct_init(void)
 {
-	t_form	*form_struct;
+	t_form	*form;
 
-	if (!(form_struct = malloc(sizeof(t_form))))
+	if (!(form = malloc(sizeof(t_form))))
 		return (NULL);
-	form_struct->mzflag = '\0';
-	form_struct->spflag = '\0';
-	form_struct->pflag = '\0';
-	form_struct->length_mod = "\0";
-	form_struct->precision = -1;
-	form_struct->padding = 0;
-	return (form_struct);
+	form->mzflag = '\0';
+	form->spflag = '\0';
+	form->pflag = '\0';
+	form->length_mod = "\0";
+	form->precision = -1;
+	form->padding = 0;
+	return (form);
 }
 
 int		arg_parse(va_list args, char *format, int *i)
 {
 	int		len;
-	t_form	*form_struct;
+	t_form	*form;
 
 	len = 0;
-	form_struct = struct_init();
+	form = struct_init();
 	(*i)++;
 	while (format[*i])
 	{
-		ft_flags(form_struct, format, i);
-		ft_prec_pad(form_struct, format, i);
-		ft_length_mod(form_struct, format, i);
-		if ((len = ft_conversion(form_struct, args, &format[*i], 0)) >= 0)
+		ft_flags(form, format, i);
+		ft_prec_pad(form, format, i);
+		ft_length_mod(form, format, i);
+		if ((len = ft_conversion(form, args, &format[*i], 0)) >= 0)
 		{
 			(*i)++;
 			break ;
 		}
 	}
-	//free(form_struct);
+	//free(form);
 	return (len);
 }
 

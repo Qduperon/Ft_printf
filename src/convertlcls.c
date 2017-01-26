@@ -6,20 +6,20 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/26 14:50:37 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/26 19:53:06 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int	ft_wcharpadding(t_form *form_struct, int oct, char *char_oct)
+static int	ft_wcharpadding(t_form *form, int oct, char *char_oct)
 {
 	int		space;
 	int		tmp;
 
-	space = form_struct->padding - oct;
+	space = form->padding - oct;
 	tmp = space;
-	if (form_struct->mzflag == '-')
+	if (form->mzflag == '-')
 	{
 		ft_putstr(char_oct);
 		while (tmp-- > 0)
@@ -55,9 +55,10 @@ static void	ft_filloctet(wchar_t c, char *char_oct, int *i, int len)
 	}
 	else
 		char_oct[(*i)++] = (char)c;
+	char_oct[(*i)] = '\0';
 }
 
-int			ft_ls(va_list args, t_form *form_struct)
+int			ft_ls(va_list args, t_form *form)
 {
 	int			oct;
 	int			len;
@@ -66,15 +67,15 @@ int			ft_ls(va_list args, t_form *form_struct)
 	wchar_t		*str;
 
 	str = va_arg(args, wchar_t *);
-	if (form_struct->precision == -1)
-		form_struct->precision = ft_wcslen(str) * 4;
+	if (form->precision == -1)
+		form->precision = ft_wcslen(str) * 4;
 	len = 0;
 	total = 0;
-	while (*str && len < form_struct->precision)
+	while (*str && len < form->precision)
 	{
 		ft_filloctet(*str, char_oct, &oct, bitlen(*str));
-		if (form_struct->padding > oct)
-			total += ft_wcharpadding(form_struct, oct, char_oct);
+		if (form->padding > oct)
+			total += ft_wcharpadding(form, oct, char_oct);
 		else
 			ft_putstr(char_oct);
 		len += oct;
@@ -85,7 +86,7 @@ int			ft_ls(va_list args, t_form *form_struct)
 	return (total);
 }
 
-int			ft_lc(va_list args, t_form *form_struct)
+int			ft_lc(va_list args, t_form *form)
 {
 	int			len;
 	int			oct;
@@ -96,8 +97,8 @@ int			ft_lc(va_list args, t_form *form_struct)
 	str = va_arg(args, wchar_t);
 	len = bitlen(str);
 	ft_filloctet(str, char_oct, &oct, len);
-	if (form_struct->padding > oct)
-		oct += ft_wcharpadding(form_struct, oct, char_oct);
+	if (form->padding > oct)
+		oct += ft_wcharpadding(form, oct, char_oct);
 	else
 		ft_putstr(char_oct);
 	return (oct);

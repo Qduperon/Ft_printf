@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*add_lmodoux(t_form *form_struct, long long nbr, char c, char *str)
+static char	*add_lmodoux(t_form *form, long long nbr, char c, char *str)
 {
 	int		base;
 
@@ -22,17 +22,17 @@ static char	*add_lmodoux(t_form *form_struct, long long nbr, char c, char *str)
 		base = 16;
 	else
 		base = 10;
-	if (ft_strcmp(form_struct->length_mod, "ll") == 0)
+	if (ft_strcmp(form->length_mod, "ll") == 0)
 		str = ft_ulltoa_base((unsigned long long)nbr, base);
-	else if (ft_strcmp(form_struct->length_mod, "l") == 0)
+	else if (ft_strcmp(form->length_mod, "l") == 0)
 		str = ft_ulltoa_base((unsigned long)nbr, base);
-	else if (ft_strcmp(form_struct->length_mod, "hh") == 0)
+	else if (ft_strcmp(form->length_mod, "hh") == 0)
 		str = ft_ulltoa_base((unsigned char)nbr, base);
-	else if (ft_strcmp(form_struct->length_mod, "h") == 0)
+	else if (ft_strcmp(form->length_mod, "h") == 0)
 		str = ft_ulltoa_base((unsigned short)nbr, base);
-	else if (ft_strcmp(form_struct->length_mod, "j") == 0)
+	else if (ft_strcmp(form->length_mod, "j") == 0)
 		str = ft_ulltoa_base((uintmax_t)nbr, base);
-	else if (ft_strcmp(form_struct->length_mod, "z") == 0)
+	else if (ft_strcmp(form->length_mod, "z") == 0)
 		str = ft_ulltoa_base((signed long)nbr, base);
 	else
 		str = ft_ulltoa_base((unsigned int)nbr, base);
@@ -40,24 +40,24 @@ static char	*add_lmodoux(t_form *form_struct, long long nbr, char c, char *str)
 	return (str);
 }
 
-char		*ft_add_lmod(t_form *form_struct, long long nbr, char c)
+char		*ft_add_lmod(t_form *form, long long nbr, char c)
 {
 	char *str;
 
 	str = NULL;
 	if (c != 'd' && c != 'i' && c != 'D')
-		return (add_lmodoux(form_struct, nbr, c, str));
-	else if (ft_strcmp(form_struct->length_mod, "ll") == 0)
+		return (add_lmodoux(form, nbr, c, str));
+	else if (ft_strcmp(form->length_mod, "ll") == 0)
 		str = ft_lltoa_base((long long)nbr, 10);
-	else if (ft_strcmp(form_struct->length_mod, "l") == 0)
+	else if (ft_strcmp(form->length_mod, "l") == 0)
 		str = ft_lltoa_base((long)nbr, 10);
-	else if (ft_strcmp(form_struct->length_mod, "hh") == 0)
+	else if (ft_strcmp(form->length_mod, "hh") == 0)
 		str = ft_lltoa_base((signed char)nbr, 10);
-	else if (ft_strcmp(form_struct->length_mod, "h") == 0)
+	else if (ft_strcmp(form->length_mod, "h") == 0)
 		str = ft_lltoa_base((short)nbr, 10);
-	else if (ft_strcmp(form_struct->length_mod, "j") == 0)
+	else if (ft_strcmp(form->length_mod, "j") == 0)
 		str = ft_lltoa_base((intmax_t)nbr, 10);
-	else if (ft_strcmp(form_struct->length_mod, "z") == 0)
+	else if (ft_strcmp(form->length_mod, "z") == 0)
 		str = ft_lltoa_base((signed long)nbr, 10);
 	else
 		str = ft_itoa_base((int)nbr, 10);
