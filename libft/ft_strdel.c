@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 17:58:42 by spalmaro          #+#    #+#             */
-/*   Updated: 2016/11/03 17:59:34 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/26 21:05:11 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_strdel(char **as)
 {
 	if (as)
 	{
-		//free(*as);
+		free(*as);
 		*as = NULL;
 	}
 }
