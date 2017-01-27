@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/26 19:53:06 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/27 20:15:51 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,46 @@ static void	ft_filloctet(wchar_t c, char *char_oct, int *i, int len)
 	char_oct[(*i)] = '\0';
 }
 
+static int	ft_bytebitbyte(wchar_t *s, t_form *form)
+{
+	int		len;
+	int		sp;
+
+	len = 0;
+	if (form->precision == -1)
+		form->precision = ft_wcslen(s) * 4;
+	while (*s && len < form->precision)
+	{
+		sp = bitlen(*s);
+		if (sp > 16 && (len + 4 < form->precision))
+			len += 4;
+		else if (sp > 11 && (len + 3 < form->precision))
+			len += 3;
+		else if (sp > 7 && ((len + 2 < form->precision)))
+			len += 2;
+		else if ((len + 1 <= form->precision))
+			len++;
+		s++;
+	}
+	printf("%d\n", len);
+	return (len);
+}
+
+static int	ft_wchartpadding(t_form *form, int oct)
+{
+	int		space;
+	int		tmp;
+
+	space = form->padding - oct;
+	tmp = space;
+	if (form->mzflag == '-')
+	{
+		while (tmp-- > 0)
+			ft_putchar(' ');
+	}
+	return (space);
+}
+
 int			ft_ls(va_list args, t_form *form)
 {
 	int			oct;
@@ -66,23 +106,33 @@ int			ft_ls(va_list args, t_form *form)
 	char		char_oct[5];
 	wchar_t		*str;
 
-	str = va_arg(args, wchar_t *);
-	if (form->precision == -1)
-		form->precision = ft_wcslen(str) * 4;
+	if(!(str = va_arg(args, wchar_t *)))
+		str = L"(null)";
 	len = 0;
+	oct = 0;
 	total = 0;
+	int k = 0;
+	if (form->precision == 0)
+		total += ft_wcharpadding(form, oct, char_oct);
+	else
+		total += ft_bytebitbyte(str, form);
 	while (*str && len < form->precision)
 	{
 		ft_filloctet(*str, char_oct, &oct, bitlen(*str));
-		if (form->padding > oct)
-			total += ft_wcharpadding(form, oct, char_oct);
+		if ((len += oct) > form->precision)
+			break;
+		if (form->padding > oct && k == 0 && form->mzflag != '-' && form->padding > form->precision)
+		{
+			total += ft_wcharpadding(form, total, char_oct);
+			k = 1;
+		}
 		else
 			ft_putstr(char_oct);
-		len += oct;
-		total += oct;
 		oct = 0;
 		str++;
 	}
+	if (form->padding > oct && form->mzflag == '-')
+		total += ft_wchartpadding(form, total);
 	return (total);
 }
 

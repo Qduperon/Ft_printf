@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/26 21:13:42 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/27 16:28:33 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		ft_c(va_list args, t_form *form)
 	{
 		if (form->precision != 1)
 			form->precision = 1;
-		str == 0 ? tmp = (ft_strpadding("\0", form, 1)) :
+		str == 0 ? tmp = (ft_strpadding((char *)&str, form, 1)) :
 		(tmp = (ft_strpadding((char *)&str, form, 0)));
 		ft_putstr(tmp);
 		i = ft_strlen(tmp);
@@ -114,6 +114,7 @@ int		ft_c(va_list args, t_form *form)
 	}
 	else
 		write(1, &str, 1);
+	str == 0 ? write(1, "\0", 1) : 0;
 	return (i);
 }
 
