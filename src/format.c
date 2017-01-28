@@ -13,7 +13,7 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-void	ft_flags(t_form *form, char *format, int *i)
+void		ft_flags(t_form *form, char *format, int *i)
 {
 	while (format[*i] && (isflag(format[*i]) == 1))
 	{
@@ -31,7 +31,7 @@ void	ft_flags(t_form *form, char *format, int *i)
 	}
 }
 
-void	ft_prec_pad(t_form *form, char *format, int *i)
+void		ft_prec_pad(t_form *form, char *format, int *i)
 {
 	if (format[*i] >= '0' && format[*i] <= '9')
 		form->padding = ft_atoi(&format[*i]);
@@ -51,7 +51,7 @@ void	ft_prec_pad(t_form *form, char *format, int *i)
 	}
 }
 
-void	ft_length_mod(t_form *form, char *frmt, int *i)
+void		ft_length_mod(t_form *form, char *frmt, int *i)
 {
 	while (frmt[*i] && (islmodifier(&frmt[*i]) > 0))
 	{
@@ -79,17 +79,22 @@ void	ft_length_mod(t_form *form, char *frmt, int *i)
 	}
 }
 
-int		ft_conversion(t_form *form, va_list args, char *c, int i)
+static void	ft_fillconvert(int (*convert[5])(va_list, t_form *))
 {
-	int		(*convert[5])(va_list, t_form*);
-	char	*conversion;
-
-	conversion = "sSpcCdDioOuUxX";
 	convert[0] = &ft_s;
 	convert[1] = &ft_ls;
 	convert[2] = &ft_p;
 	convert[3] = &ft_c;
 	convert[4] = &ft_lc;
+}
+
+int			ft_conversion(t_form *form, va_list args, char *c, int i)
+{
+	int		(*convert[5])(va_list, t_form*);
+	char	*conversion;
+
+	conversion = "sSpcCdDioOuUxX";
+	ft_fillconvert(convert);
 	while (conversion[i])
 	{
 		if (conversion[i] == c[0] && (i >= 5))
@@ -102,8 +107,7 @@ int		ft_conversion(t_form *form, va_list args, char *c, int i)
 		return (writeperct(c, form));
 	else
 	{
-		ft_putchar(c[0]);
-		return (1);
+		return (writechar(c[0], form));
+
 	}
-	return (0);
 }

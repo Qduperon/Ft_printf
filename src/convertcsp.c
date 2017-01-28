@@ -25,7 +25,7 @@ char	*ft_strprecision(char *str, t_form *form)
 		if (!(tmp = malloc(sizeof(char *) * (form->padding))))
 			return (NULL);
 		while (space-- > 0)
-			tmp[i++] = ' ';
+			tmp[i++] = (form->mzflag == '0') ? '0' : ' ';
 		tmp[i] = '\0';
 		if (form->mzflag != '-')
 			tmp = ft_strncat(tmp, str, form->precision);
@@ -52,7 +52,8 @@ char	*ft_strpadding(char *str, t_form *form, int f)
 	if (!(tmp = malloc(sizeof(char *) * (form->padding))))
 		return (NULL);
 	while (space-- > 0)
-		tmp[i++] = ' ';
+		tmp[i++] = (form->mzflag == '0') ? '0' : ' ';
+	printf("hey%s\n", tmp);
 	if (form->mzflag == '-')
 	{
 		str = ft_strndup(str, form->precision);

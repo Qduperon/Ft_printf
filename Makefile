@@ -25,7 +25,7 @@ LIB_O = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o       \
 		ft_putendl_fd.o ft_putnbr_fd.o ft_lstnew.o ft_lstdelone.o ft_lstdel.o \
 		ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_base_size.o ft_strtoupper.o \
 		ft_strtolower.o ft_ulltoa_base.o ft_lltoa_base.o ft_itoa_base.o \
-		ft_strndup.o bitlen.o ft_wcslen.o
+		ft_strndup.o bitlen.o ft_wcslen.o ft_putnchar.o
 
 C_FILES = ft_printf.c ft_is.c format.c ft_add_lmod.c convertdioux.c \
 			convertcsp.c convertlcls.c convertp.c\

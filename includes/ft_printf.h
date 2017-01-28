@@ -49,5 +49,6 @@ int				ft_convertint(long long nbr, t_form *form, char c);
 int				isflag(char c);
 int				islmodifier(char *c);
 int				writeperct(char *c, t_form *form);
+int				writechar(char c, t_form *form);
 
 #endif

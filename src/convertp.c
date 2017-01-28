@@ -37,3 +37,18 @@ int		writeperct(char *c, t_form *form)
 	//free(tmp);
 	return (len);
 }
+
+int		writechar(char c, t_form *form)
+{
+	int		x;
+
+	x = (form->padding > 0) ? (form->padding - 1) : 0;
+	if (form->padding > 0 && form->mzflag == '0')
+		ft_putnchar('0', form->padding - 1);
+	else if (form->padding > 0 && form->mzflag != '-')
+		ft_putnchar(' ', form->padding - 1);
+	ft_putchar(c);
+	if (form->padding > 0 && form->mzflag == '-')
+		ft_putnchar(' ', form->padding - 1);
+	return (1 + x);
+}

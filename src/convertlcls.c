@@ -25,6 +25,12 @@ static int	ft_wcharpadding(t_form *form, int oct, char *char_oct)
 		while (tmp-- > 0)
 			ft_putchar(' ');
 	}
+	else if (form->mzflag == '0')
+	{
+		while (tmp-- > 0)
+			ft_putchar('0');
+		ft_putstr(char_oct);
+	}
 	else
 	{
 		while (tmp-- > 0)
@@ -66,20 +72,21 @@ static int	ft_bytebitbyte(wchar_t *s, t_form *form)
 	len = 0;
 	if (form->precision == -1)
 		form->precision = ft_wcslen(s) * 4;
-	while (*s && len < form->precision)
+	while (*s)
 	{
 		sp = bitlen(*s);
-		if (sp > 16 && (len + 4 < form->precision))
+		if (sp > 16 && (len + 4 <= form->precision))
 			len += 4;
-		else if (sp > 11 && (len + 3 < form->precision))
+		else if (sp > 11 && (len + 3 <= form->precision))
 			len += 3;
-		else if (sp > 7 && ((len + 2 < form->precision)))
+		else if (sp > 7 && (len + 2 <= form->precision))
 			len += 2;
-		else if ((len + 1 <= form->precision))
+		else if (sp <= 7 && (len + 1 <= form->precision))
 			len++;
+		else
+			break ;
 		s++;
 	}
-	printf("%d\n", len);
 	return (len);
 }
 
@@ -151,5 +158,6 @@ int			ft_lc(va_list args, t_form *form)
 		oct += ft_wcharpadding(form, oct, char_oct);
 	else
 		ft_putstr(char_oct);
+	str == 0 ? write(1, "\0", 1) : 0;
 	return (oct);
 }
