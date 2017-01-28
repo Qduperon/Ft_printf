@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/27 16:28:33 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:11:15 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*ft_strpadding(char *str, t_form *form, int f)
 		return (NULL);
 	while (space-- > 0)
 		tmp[i++] = (form->mzflag == '0') ? '0' : ' ';
-	printf("hey%s\n", tmp);
 	if (form->mzflag == '-')
 	{
 		str = ft_strndup(str, form->precision);

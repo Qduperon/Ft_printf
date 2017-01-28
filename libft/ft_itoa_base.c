@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:09 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/23 21:57:52 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/28 20:29:18 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ static char		*ft_convert_base(int sign, int len, int value, int base)
 	if (!(str = (char *)malloc(sizeof(char) * (len + sign + 1))))
 		return (NULL);
 	str[len] = '\0';
-	while (len + sign >= 0)
+	while (len + sign > 0)
 	{
 		if (sign == 1)
 			str[0] = '-';
-		str[--len] = alphabet[(value % base)];
+		if (--len < 0)
+			break ;
+		str[len] = alphabet[(value % base)];
 		value /= base;
 	}
+			ft_putnbr(len + sign);
 	return (str);
 }
 

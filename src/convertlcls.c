@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:14 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/27 20:15:51 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:29:22 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,7 @@ static int	ft_wchartpadding(t_form *form, int oct)
 	space = form->padding - oct;
 	tmp = space;
 	if (form->mzflag == '-')
-	{
-		while (tmp-- > 0)
-			ft_putchar(' ');
-	}
+		ft_putnchar(' ', tmp);
 	return (space);
 }
 
@@ -119,6 +116,7 @@ int			ft_ls(va_list args, t_form *form)
 	oct = 0;
 	total = 0;
 	int k = 0;
+	ft_bzero(char_oct, 5);
 	if (form->precision == 0)
 		total += ft_wcharpadding(form, oct, char_oct);
 	else
