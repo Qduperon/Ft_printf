@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:21 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/28 16:11:15 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/29 18:26:56 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_strprecision(char *str, t_form *form)
 		{
 			str = ft_strndup(str, form->precision);
 			tmp = ft_strcat(str, tmp);
+			free(str);
 		}
 		return (tmp);
 	}
@@ -81,19 +82,21 @@ int		ft_s(va_list args, t_form *form)
 		ft_putstr(str);
 		return (ft_strlen(str));
 	}
-	else if (form->precision < (int)ft_strlen(str) &&
-	form->precision != -1)
+	else if (form->precision < (int)ft_strlen(str) && form->precision != -1)
 		tmp = ft_strprecision(str, form);
 	else if (form->padding > (int)ft_strlen(str))
 		tmp = ft_strpadding(str, form, 0);
 	ft_putstr(tmp);
+	// str = tmp;
 	len = (int)ft_strlen(tmp);
+	// free(tmp);
 	return (len);
 }
 
 int		ft_c(va_list args, t_form *form)
 {
 	int				i;
+	char			*t2;
 	char			*tmp;
 	unsigned char	str;
 
@@ -108,9 +111,10 @@ int		ft_c(va_list args, t_form *form)
 		str == 0 ? tmp = (ft_strpadding((char *)&str, form, 1)) :
 		(tmp = (ft_strpadding((char *)&str, form, 0)));
 		ft_putstr(tmp);
+		t2 = tmp;
 		i = ft_strlen(tmp);
+		free(tmp);
 		(str == 0) ? (i++) : 0;
-		//free(tmp);
 	}
 	else
 		write(1, &str, 1);
@@ -122,6 +126,7 @@ int		ft_p(va_list args, t_form *form)
 {
 	unsigned long	i;
 	int				len;
+	char			*tmp;
 	char			*str;
 
 	i = (unsigned long)va_arg(args, void *);
@@ -135,6 +140,8 @@ int		ft_p(va_list args, t_form *form)
 	if (form->padding > (int)ft_strlen(str))
 		str = ft_strpadding(str, form, 0);
 	ft_putstr(str);
-	len = (int)ft_strlen(str);
+	tmp = str;
+	len = (int)ft_strlen(tmp);
+	free(str);
 	return (len);
 }

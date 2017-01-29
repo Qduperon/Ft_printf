@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:39:05 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/22 18:48:57 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/29 18:03:55 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		arg_parse(va_list args, char *format, int *i)
 			break ;
 		}
 	}
-	//free(form);
+	free(form);
 	return (len);
 }
 

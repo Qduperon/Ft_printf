@@ -6,7 +6,7 @@
 /*   By: spalmaro <spalmaro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 19:38:54 by spalmaro          #+#    #+#             */
-/*   Updated: 2017/01/28 20:07:38 by spalmaro         ###   ########.fr       */
+/*   Updated: 2017/01/29 18:54:01 by spalmaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*check_mzpflag(char *str, char *tmp, int extra, int i)
 static char	*ft_nbrpadding(char *str, t_form *form, int i)
 {
 	char	*tmp;
+	char	*t2;
 	int		extra;
 
 	extra = form->padding - ((int)ft_strlen(str));
@@ -55,9 +56,14 @@ static char	*ft_nbrpadding(char *str, t_form *form, int i)
 			tmp[i++] = ' ';
 		tmp[i] = '\0';
 		if (form->mzflag == '-')
-			tmp = ft_strcat(str, tmp);
+		{
+			t2 = tmp;
+			tmp = ft_strjoin(str, tmp);
+			free(t2);
+		}
 		else
 			tmp = ft_strcat(tmp, str);
+		free(str);
 	}
 	return (tmp);
 }
@@ -86,7 +92,7 @@ static char	*ft_addprefix(char *str, t_form *form, char c)
 	{
 		nbr = str;
 		str = ft_strjoin(tmp, str);
-		//free(nbr);
+		free(nbr);
 	}
 	return (str);
 }
@@ -121,19 +127,22 @@ static char	*ft_nbrprecision(char *str, t_form *form, int i)
 
 int			ft_convertint(long long nbr, t_form *form, char c)
 {
-	char		*tmp;
-	int			len;
+	char	*str;
+	// char	*tmp;
+	int		len;
 
 	len = 0;
 	c == 'D' ? (form->length_mod = "l") : 0;
 	c == 'O' ? (form->length_mod = "l") : 0;
 	c == 'U' ? (form->length_mod = "l") : 0;
-	tmp = ft_add_lmod(form, nbr, c);
-	tmp = ft_nbrprecision(tmp, form, 0);
-	tmp = ft_addprefix(tmp, form, c);
-	if (form->padding > (int)ft_strlen(tmp))
-		tmp = ft_nbrpadding(tmp, form, 0);
-	ft_putstr(tmp);
-	len = ft_strlen(tmp);
+	str = ft_add_lmod(form, nbr, c);
+	str = ft_nbrprecision(str, form, 0);
+	str = ft_addprefix(str, form, c);
+	if (form->padding > (int)ft_strlen(str))
+		str = ft_nbrpadding(str, form, 0);
+	ft_putstr(str);
+	// tmp = str;
+	len = ft_strlen(str);
+	// str != NULL ? free(str) : 0;
 	return (len);
 }
