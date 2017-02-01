@@ -30,7 +30,6 @@ static char		*ft_convert_base(int sign, int len, int value, int base)
 		str[len] = alphabet[(value % base)];
 		value /= base;
 	}
-			ft_putnbr(len + sign);
 	return (str);
 }
 

@@ -28,7 +28,7 @@ LIB_O = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o       \
 		ft_strndup.o bitlen.o ft_wcslen.o ft_putnchar.o
 
 C_FILES = ft_printf.c ft_is.c format.c ft_add_lmod.c convertdioux.c \
-			convertcsp.c convertlcls.c convertp.c\
+			convertcsp.c convertls.c convertlc.c convertp.c\
 
 LIB_PATH = -I ./libft/
 

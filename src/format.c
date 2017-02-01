@@ -106,8 +106,5 @@ int			ft_conversion(t_form *form, va_list args, char *c, int i)
 	if (c[0] == '%')
 		return (writeperct(c, form));
 	else
-	{
 		return (writechar(c[0], form));
-
-	}
 }

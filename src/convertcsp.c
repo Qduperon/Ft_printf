@@ -142,6 +142,6 @@ int		ft_p(va_list args, t_form *form)
 	ft_putstr(str);
 	tmp = str;
 	len = (int)ft_strlen(tmp);
-	free(str);
+	// free(str);
 	return (len);
 }

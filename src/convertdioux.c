@@ -42,7 +42,7 @@ static char	*check_mzpflag(char *str, char *tmp, int extra, int i)
 static char	*ft_nbrpadding(char *str, t_form *form, int i)
 {
 	char	*tmp;
-	char	*t2;
+	// char	*t2;
 	int		extra;
 
 	extra = form->padding - ((int)ft_strlen(str));
@@ -57,9 +57,9 @@ static char	*ft_nbrpadding(char *str, t_form *form, int i)
 		tmp[i] = '\0';
 		if (form->mzflag == '-')
 		{
-			t2 = tmp;
+			// t2 = tmp;
 			tmp = ft_strjoin(str, tmp);
-			free(t2);
+			// free(t2);
 		}
 		else
 			tmp = ft_strcat(tmp, str);
